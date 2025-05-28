@@ -1,0 +1,12 @@
+.venv/
+.vscode/
+.env
+__pycache__/
+*.pyc
+*.sqlite3
+*.log
+
+# ignore all migrations except 
+migrations/
+!apps/djangocore/migrations/0002_init_app_settings.py
+
