@@ -5,6 +5,7 @@ __pycache__/
 *.pyc
 *.sqlite3
 *.log
+outline.md
 
 # ignore all migrations except 
 migrations/
