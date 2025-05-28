@@ -2,6 +2,7 @@ import http.server
 import socketserver
 import json
 import logging
+import os
 from email.parser import Parser
 
 # Configure logging for the server itself
@@ -46,6 +47,44 @@ class RequestLoggerHandler(http.server.BaseHTTPRequestHandler):
         logger.info(f"\n--- GET Request ---")
         logger.info(f"Path: {self.path}")
         logger.info(f"Headers:\n{self.headers}")
+
+        if self.path == '/export-full.xml':
+            try:
+                # Get the directory of the current script
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                xml_path = os.path.join(current_dir, 'export-full.xml')
+                
+                with open(xml_path, 'rb') as f:
+                    self._set_headers(200, 'application/xml')
+                    self.wfile.write(f.read())
+                return
+            except FileNotFoundError:
+                self._set_headers(404, 'application/json')
+                self.wfile.write(json.dumps({'error': 'XML file not found'}).encode('utf-8'))
+                return
+            except Exception as e:
+                self._set_headers(500, 'application/json')
+                self.wfile.write(json.dumps({'error': str(e)}).encode('utf-8'))
+                return
+        
+        if self.path == '/export-partial.xml':
+            try:
+                # Get the directory of the current script
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                xml_path = os.path.join(current_dir, 'export-partial.xml')
+                
+                with open(xml_path, 'rb') as f:
+                    self._set_headers(200, 'application/xml')
+                    self.wfile.write(f.read())
+                return
+            except FileNotFoundError:
+                self._set_headers(404, 'application/json')
+                self.wfile.write(json.dumps({'error': 'XML file not found'}).encode('utf-8'))
+                return
+            except Exception as e:
+                self._set_headers(500, 'application/json')
+                self.wfile.write(json.dumps({'error': str(e)}).encode('utf-8'))
+                return
 
         # Handle /orders endpoint directly
         if '/orders' in self.path:

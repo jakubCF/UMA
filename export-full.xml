@@ -1,0 +1,2602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Export time: 05.05.2025 04:00-->
+<PRODUCTS version="2.0">
+	<PRODUCT>
+		<CODE>P00018</CODE>
+		<PRODUCT_ID>46</PRODUCT_ID>
+		<ACTIVE_YN>1</ACTIVE_YN>
+		<ARCHIVED_YN>0</ARCHIVED_YN>
+		<REPLACEMENT_PRODUCT_CODE/>
+		<CAN_ADD_TO_BASKET_YN>1</CAN_ADD_TO_BASKET_YN>
+		<ADULT_YN>0</ADULT_YN>
+		<LABELS>
+			<LABEL>
+				<NAME>Vyrobeno v ČR</NAME>
+				<ACTIVE_YN>1</ACTIVE_YN>
+				<ACTIVE_FROM/>
+				<ACTIVE_TO/>
+			</LABEL>
+		</LABELS>
+		<DESCRIPTIONS>
+			<DESCRIPTION language="cz">
+				<TITLE>Lasting merino ponožky nízké FWE</TITLE>
+				<URL>https://www.merinozky.cz/p/lasting-merino-ponozky-nizke</URL>
+				<SHORT_DESCRIPTION><![CDATA[Lasting ponožky nízké z 85 % merino vlny.]]></SHORT_DESCRIPTION>
+				<LONG_DESCRIPTION><![CDATA[<p><strong>Tenké nízké merino ponožky<span> </span></strong>ideální pro celodenní nošení. Díky skvělým termoregulačním schopnostem merino vlny nebude docházet k přehřátí nohou,]]></LONG_DESCRIPTION>
+			</DESCRIPTION>
+		</DESCRIPTIONS>
+		<SEO_OPTIMALIZATION>
+			<SEO language="cz">
+				<SEO_URL>lasting-merino-ponozky-nizke</SEO_URL>
+				<SEO_TITLE></SEO_TITLE>
+				<SEO_META_DESCRIPTION></SEO_META_DESCRIPTION>
+			</SEO>
+		</SEO_OPTIMALIZATION>
+		<MANUFACTURER>Lasting</MANUFACTURER>
+		<SUPPLIER_CODE/>
+		<EAN/>
+		<AVAILABILITY>Není skladem</AVAILABILITY>
+		<STOCK>3</STOCK>
+		<STOCK_POSITION/>
+		<LIMIT_ORDERS/>
+		<WEIGHT>40</WEIGHT>
+		<UNIT>ks</UNIT>
+		<SHIPMENT_GROUP/>
+		<VATS>
+			<VAT language="cz">21</VAT>
+		</VATS>
+		<LENGTH>
+			<ACTIVE_YN>0</ACTIVE_YN>
+		</LENGTH>
+		<PRIVATE_YN>0</PRIVATE_YN>
+		<PRIVATE_CUSTOMERS_ONLY_YN>0</PRIVATE_CUSTOMERS_ONLY_YN>
+		<EXCLUDE_FROM_SEARCH_YN>0</EXCLUDE_FROM_SEARCH_YN>
+		<GROUPS/>
+		<CATEGORIES>
+			<CATEGORY>
+				<CODE/>
+				<NAME>Ženy</NAME>
+				<PRIMARY_YN>0</PRIMARY_YN>
+				<POSITION>72</POSITION>
+			</CATEGORY>
+			<CATEGORY>
+				<CODE/>
+				<NAME>Muži</NAME>
+				<PRIMARY_YN>0</PRIMARY_YN>
+				<POSITION>10</POSITION>
+			</CATEGORY>
+			<CATEGORY>
+				<CODE/>
+				<NAME>Pánské ponožky</NAME>
+				<PRIMARY_YN>0</PRIMARY_YN>
+				<POSITION>52</POSITION>
+			</CATEGORY>
+			<CATEGORY>
+				<CODE/>
+				<NAME>Dámské ponožky</NAME>
+				<PRIMARY_YN>0</PRIMARY_YN>
+				<POSITION>71</POSITION>
+			</CATEGORY>
+			<CATEGORY>
+				<CODE/>
+				<NAME>Ponožky</NAME>
+				<PRIMARY_YN>1</PRIMARY_YN>
+				<POSITION>38</POSITION>
+			</CATEGORY>
+		</CATEGORIES>
+		<PRICES_FORMULAS/>
+		<RECYCLING_FEE/>
+		<PRICES>
+			<PRICE language="cz">
+				<PRICELISTS>
+					<PRICELIST>
+						<NAME>Výchozí</NAME>
+						<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+						<PRODUCT_DISCOUNT/>
+						<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+						<PRICE_SALE/>
+						<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+						<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+					</PRICELIST>
+				</PRICELISTS>
+				<PRICE_PURCHASE>1</PRICE_PURCHASE>
+				<PRICE_COMMON/>
+				<CURRENCY>CZK</CURRENCY>
+			</PRICE>
+		</PRICES>
+		<IMAGES>
+			<IMAGE>
+				<URL>https://merinozky.s1.cdn-upgates.com/8/8660694b240c82-fwe-tyrkys.webp</URL>
+				<MAIN_YN>0</MAIN_YN>
+				<LIST_YN>1</LIST_YN>
+			</IMAGE>
+			<IMAGE>
+				<URL>https://merinozky.s1.cdn-upgates.com/s/s6606957ab464d-fwe-cervene.webp</URL>
+				<MAIN_YN>1</MAIN_YN>
+				<LIST_YN>0</LIST_YN>
+			</IMAGE>
+			<IMAGE>
+				<URL>https://merinozky.s1.cdn-upgates.com/5/56606952e5a6e5-fwe-cerne.webp</URL>
+				<MAIN_YN>0</MAIN_YN>
+				<LIST_YN>0</LIST_YN>
+			</IMAGE>
+		</IMAGES>
+		<FILES/>
+		<BENEFITS/>
+		<PARAMETERS>
+			<PARAMETER>
+				<NAME language="cz">Materiál</NAME>
+				<VALUE language="cz">Merino vlna</VALUE>
+			</PARAMETER>
+			<PARAMETER>
+				<NAME language="cz">Vhodné pro období</NAME>
+				<VALUE language="cz">Podzim/Jaro</VALUE>
+			</PARAMETER>
+			<PARAMETER>
+				<NAME language="cz">Vhodné pro období</NAME>
+				<VALUE language="cz">Léto</VALUE>
+			</PARAMETER>
+			<PARAMETER>
+				<NAME language="cz">Výška ponožek</NAME>
+				<VALUE language="cz">Nad kotníky</VALUE>
+			</PARAMETER>
+		</PARAMETERS>
+		<CONFIGURATIONS/>
+		<VARIANTS>
+			<VARIANT>
+				<CODE>P00018-9</CODE>
+				<VARIANT_ID>193</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-900M</SUPPLIER_CODE>
+				<EAN>8596445819537</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT>38</WEIGHT>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/5/56606952e5a6e5-fwe-cerne.webp</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">38-41</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Černá</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;e stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-10</CODE>
+				<VARIANT_ID>194</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-900S</SUPPLIER_CODE>
+				<EAN>8596445019544</EAN>
+				<AVAILABILITY_NOTES>
+					<AVAILABILITY_NOTE language="cz">FWE-900S</AVAILABILITY_NOTE>
+				</AVAILABILITY_NOTES>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT>33</WEIGHT>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/5/56606952e5a6e5-fwe-cerne.webp</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">34-37</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Černá</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;e stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-11</CODE>
+				<VARIANT_ID>195</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-900L</SUPPLIER_CODE>
+				<EAN>8596445019469</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT>39</WEIGHT>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/5/56606952e5a6e5-fwe-cerne.webp</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">42-45</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Černá</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;e stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-12</CODE>
+				<VARIANT_ID>196</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-900XL</SUPPLIER_CODE>
+				<EAN>8596445019520</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT>39</WEIGHT>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/5/56606952e5a6e5-fwe-cerne.webp</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">46-49</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Černá</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;e stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-1</CODE>
+				<VARIANT_ID>197</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-816M</SUPPLIER_CODE>
+				<EAN>8596445019698</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT>38</WEIGHT>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/1/1603c0ddd1401e-lasting-merino-ponozky-fwe-sede.jpg</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">38-41</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Tmavě šedá</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;e stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-2</CODE>
+				<VARIANT_ID>198</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-816S</SUPPLIER_CODE>
+				<EAN>8596445019704</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT>33</WEIGHT>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/1/1603c0ddd1401e-lasting-merino-ponozky-fwe-sede.jpg</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">34-37</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Tmavě šedá</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;e stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-3</CODE>
+				<VARIANT_ID>199</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-816L</SUPPLIER_CODE>
+				<EAN>8596445019674</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT>40</WEIGHT>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/1/1603c0ddd1401e-lasting-merino-ponozky-fwe-sede.jpg</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">42-45</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Tmavě šedá</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;e stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-4</CODE>
+				<VARIANT_ID>200</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-816XL</SUPPLIER_CODE>
+				<EAN>8596445019681</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT>42</WEIGHT>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/1/1603c0ddd1401e-lasting-merino-ponozky-fwe-sede.jpg</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">46-49</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Tmavě šedá</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-5</CODE>
+				<VARIANT_ID>1136</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>1</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-616S</SUPPLIER_CODE>
+				<EAN>8596445040364</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Poslední kusy</AVAILABILITY>
+				<STOCK>1</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT>33</WEIGHT>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/t/t61902fab85384-lasting-merino-ponozky-fwe-zelene.jpg</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">34-37</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Zelená</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-6</CODE>
+				<VARIANT_ID>1137</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-616M</SUPPLIER_CODE>
+				<EAN>8596445040357</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT>38</WEIGHT>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/t/t61902fab85384-lasting-merino-ponozky-fwe-zelene.jpg</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">38-41</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Zelená</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-7</CODE>
+				<VARIANT_ID>1138</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-616L</SUPPLIER_CODE>
+				<EAN>8596445040340</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT>40</WEIGHT>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/t/t61902fab85384-lasting-merino-ponozky-fwe-zelene.jpg</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">42-45</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Zelená</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-8</CODE>
+				<VARIANT_ID>1140</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-616XL</SUPPLIER_CODE>
+				<EAN>8596445040371</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT>42</WEIGHT>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/t/t61902fab85384-lasting-merino-ponozky-fwe-zelene.jpg</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">46-49</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Zelená</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-0</CODE>
+				<VARIANT_ID>2103</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>1</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE/>
+				<EAN>8995067835721</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT/>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/u/u645e338a230c7-lasting-merino-ponozky-fwe-bile.jpg</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">34-37</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Bílá</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT>15</PRODUCT_DISCOUNT>
+								<PRODUCT_DISCOUNT_REAL>15</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE>169.15</PRICE_SALE>
+								<PRICE_WITH_VAT>169.15</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>139.79</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">white</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-17</CODE>
+				<VARIANT_ID>2687</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>1</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-316S</SUPPLIER_CODE>
+				<EAN>8596445040289</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Poslední kusy</AVAILABILITY>
+				<STOCK>2</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT/>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/s/s6606957ab464d-fwe-cervene.webp</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">34-37</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Červená</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-18</CODE>
+				<VARIANT_ID>2688</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-316M</SUPPLIER_CODE>
+				<EAN>8596445040272</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT/>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/s/s6606957ab464d-fwe-cervene.webp</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">38-41</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Červená</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-19</CODE>
+				<VARIANT_ID>2689</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-316L</SUPPLIER_CODE>
+				<EAN>8596445040265</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT/>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/s/s6606957ab464d-fwe-cervene.webp</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">42-45</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Červená</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-13</CODE>
+				<VARIANT_ID>2690</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-515S</SUPPLIER_CODE>
+				<EAN></EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT/>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/8/8660694b240c82-fwe-tyrkys.webp</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">34-37</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Tyrkysová</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-14</CODE>
+				<VARIANT_ID>2691</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-515M</SUPPLIER_CODE>
+				<EAN>8596445052930</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT/>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/8/8660694b240c82-fwe-tyrkys.webp</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">38-41</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Tyrkysová</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-15</CODE>
+				<VARIANT_ID>2692</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-515L</SUPPLIER_CODE>
+				<EAN>8596445052923</EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT/>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/8/8660694b240c82-fwe-tyrkys.webp</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">42-45</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Tyrkysová</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+			<VARIANT>
+				<CODE>P00018-16</CODE>
+				<VARIANT_ID>2693</VARIANT_ID>
+				<MAIN_YN>0</MAIN_YN>
+				<ACTIVE_YN>0</ACTIVE_YN>
+				<CAN_ADD_TO_BASKET_YN/>
+				<LABELS/>
+				<SUPPLIER_CODE>FWE-515XL</SUPPLIER_CODE>
+				<EAN></EAN>
+				<AVAILABILITY_NOTES/>
+				<AVAILABILITY>Není skladem</AVAILABILITY>
+				<STOCK>0</STOCK>
+				<STOCK_POSITION/>
+				<WEIGHT/>
+				<IMAGE_URL>https://merinozky.s1.cdn-upgates.com/8/8660694b240c82-fwe-tyrkys.webp</IMAGE_URL>
+				<PARAMETERS>
+					<PARAMETER>
+						<NAME language="cz">Velikost</NAME>
+						<VALUE language="cz">46-49</VALUE>
+					</PARAMETER>
+					<PARAMETER>
+						<NAME language="cz">Barva</NAME>
+						<VALUE language="cz">Tyrkysová</VALUE>
+					</PARAMETER>
+				</PARAMETERS>
+				<PRICES>
+					<PRICE language="cz">
+						<PRICELISTS>
+							<PRICELIST>
+								<NAME>Výchozí</NAME>
+								<PRICE_ORIGINAL>199</PRICE_ORIGINAL>
+								<PRODUCT_DISCOUNT/>
+								<PRODUCT_DISCOUNT_REAL>0</PRODUCT_DISCOUNT_REAL>
+								<PRICE_SALE/>
+								<PRICE_WITH_VAT>199</PRICE_WITH_VAT>
+								<PRICE_WITHOUT_VAT>164.46</PRICE_WITHOUT_VAT>
+							</PRICELIST>
+						</PRICELISTS>
+						<PRICE_PURCHASE>1</PRICE_PURCHASE>
+						<PRICE_COMMON>0</PRICE_COMMON>
+						<CURRENCY>CZK</CURRENCY>
+					</PRICE>
+				</PRICES>
+				<METAS>
+					<META type="input">
+						<META_KEY>cont</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>col</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>color_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>custom_label_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>gender_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">unisex</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>identifier_exists_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">TRUE</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>material_google_merchant</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">merino wool</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>description_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="input">
+						<META_KEY>productname_heureka</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz"></META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="select">
+						<META_KEY>categorytext_zbozi_cz</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+						</META_VALUES>
+					</META>
+					<META type="textarea">
+						<META_KEY>params_zbozi</META_KEY>
+						<META_VALUES>
+							<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+						</META_VALUES>
+					</META>
+				</METAS>
+			</VARIANT>
+		</VARIANTS>
+		<RELATED_PRODUCTS/>
+		<ALTERNATIVE_PRODUCTS>
+			<CODE>P00179</CODE>
+			<CODE>P00014</CODE>
+			<CODE>P00019</CODE>
+			<CODE>P00079</CODE>
+			<CODE>P00105</CODE>
+			<CODE>P00127</CODE>
+			<CODE>P00128</CODE>
+			<CODE>P00161</CODE>
+		</ALTERNATIVE_PRODUCTS>
+		<ACCESSORIES>
+			<CODE>P00053</CODE>
+			<CODE>P00054</CODE>
+			<CODE>P00148</CODE>
+		</ACCESSORIES>
+		<GIFTS/>
+		<SETS/>
+		<METAS>
+			<META type="input">
+				<META_KEY>cont</META_KEY>
+				<META_VALUES>
+					<META_VALUE language="cz"></META_VALUE>
+				</META_VALUES>
+			</META>
+			<META type="input">
+				<META_KEY>col</META_KEY>
+				<META_VALUES>
+					<META_VALUE language="cz"></META_VALUE>
+				</META_VALUES>
+			</META>
+			<META type="input">
+				<META_KEY>color_google_merchant</META_KEY>
+				<META_VALUES>
+					<META_VALUE language="cz">Green</META_VALUE>
+				</META_VALUES>
+			</META>
+			<META type="textarea">
+				<META_KEY>custom_label_google_merchant</META_KEY>
+				<META_VALUES>
+					<META_VALUE language="cz">custom_label_3:Dospelacke_ponozky</META_VALUE>
+				</META_VALUES>
+			</META>
+			<META type="select">
+				<META_KEY>gender_google_merchant</META_KEY>
+				<META_VALUES>
+					<META_VALUE language="cz">unisex</META_VALUE>
+				</META_VALUES>
+			</META>
+			<META type="select">
+				<META_KEY>categorytext_google_merchant</META_KEY>
+				<META_VALUES>
+					<META_VALUE language="cz">209</META_VALUE>
+				</META_VALUES>
+			</META>
+			<META type="input">
+				<META_KEY>identifier_exists_google_merchant</META_KEY>
+				<META_VALUES>
+					<META_VALUE language="cz">TRUE</META_VALUE>
+				</META_VALUES>
+			</META>
+			<META type="input">
+				<META_KEY>material_google_merchant</META_KEY>
+				<META_VALUES>
+					<META_VALUE language="cz">merino wool</META_VALUE>
+				</META_VALUES>
+			</META>
+			<META type="textarea">
+				<META_KEY>description_heureka</META_KEY>
+				<META_VALUES>
+					<META_VALUE language="cz"></META_VALUE>
+				</META_VALUES>
+			</META>
+			<META type="input">
+				<META_KEY>productname_heureka</META_KEY>
+				<META_VALUES>
+					<META_VALUE language="cz"></META_VALUE>
+				</META_VALUES>
+			</META>
+			<META type="select">
+				<META_KEY>categorytext_zbozi_cz</META_KEY>
+				<META_VALUES>
+					<META_VALUE language="cz">Oblečení a móda | Pánská móda | Pánské oblečení | Pánské spodní a noční prádlo | Pánské ponožky</META_VALUE>
+				</META_VALUES>
+			</META>
+			<META type="textarea">
+				<META_KEY>params_zbozi</META_KEY>
+				<META_VALUES>
+					<META_VALUE language="cz">materiál oblečení:vlna merino&#13;se stříbrem:ne</META_VALUE>
+				</META_VALUES>
+			</META>
+		</METAS>
+	</PRODUCT>
+</PRODUCTS>

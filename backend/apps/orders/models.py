@@ -40,9 +40,9 @@ class Order(models.Model):
     payment = models.JSONField(null=True, blank=True)
     attachments = models.JSONField(null=True, blank=True)
     metas = models.JSONField(null=True, blank=True)
-    pg_status = models.CharField(max_length=30, choices=OrderStatus.CHOICES, default=OrderStatus.PROCESSING)
-    pg_created_at = models.DateTimeField(auto_now_add=True)
-    pg_updated_at = models.DateTimeField(auto_now=True)
+    uma_status = models.CharField(max_length=30, choices=OrderStatus.CHOICES, default=OrderStatus.PROCESSING)
+    uma_created_at = models.DateTimeField(auto_now_add=True)
+    uma_updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['-creation_time']
@@ -84,10 +84,10 @@ class OrderItem(models.Model):
     configurations = models.JSONField(null=True, blank=True)
     categories = models.JSONField(null=True, blank=True)
     image_url = models.CharField(max_length=200, null=True, blank=True)
-    pg_picked = models.CharField(max_length=30, choices=OrderItemPickStatus.CHOICES, default=OrderItemPickStatus.NOT_PICKED, blank=True, null=True)
-    pg_created_at = models.DateTimeField(auto_now_add=True)
-    pg_updated_at = models.DateTimeField(auto_now=True)
-    
+    uma_picked = models.CharField(max_length=30, choices=OrderItemPickStatus.CHOICES, default=OrderItemPickStatus.NOT_PICKED, blank=True, null=True)
+    uma_created_at = models.DateTimeField(auto_now_add=True)
+    uma_updated_at = models.DateTimeField(auto_now=True)
+
     class Meta:
         ordering = ['order', 'product_id']
 

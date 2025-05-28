@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser # Or define your own
 from django.utils import timezone
 
-from apps.upgates_integration.tasks import sync_orders_task
+from apps.upgates_integration.tasks import sync_orders_task, sync_full_products_task, sync_partial_products_task
 
 class SyncDataTriggerAPIView(APIView):
     # Only allow authenticated admin users to trigger syncs
@@ -23,6 +23,12 @@ class SyncDataTriggerAPIView(APIView):
             
             sync_orders_task.delay()#creation_time_from=creation_time_from_str)
             message = "Order synchronization started in background."
+        elif data_type == 'products_full':
+            sync_full_products_task.delay()
+            message = "FULL product synchronization started in background."
+        elif data_type == 'products_partial':
+            sync_partial_products_task.delay()
+            message = "PARTIAL product synchronization started in background."
         else:
             return Response(
                 {"detail": "Invalid sync type. Must be 'products' or 'orders'."},

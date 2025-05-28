@@ -3,7 +3,7 @@ from celery import shared_task
 from django.utils import timezone
 import logging
 
-from .sync_logic import sync_orders_from_api
+from .sync_logic import sync_products_from_full_feed, sync_products_from_partial_feed, sync_orders_from_api
 
 logger = logging.getLogger(__name__)
 
@@ -43,7 +43,34 @@ def debug_task():
     logger.info("🥳 Debug task executed successfully!")
     print("DEBUG TASK RAN TO CONSOLE!") # Also print to console for direct visibility
 
-# Your existing sync_orders_task below this
-# @shared_task
-# def sync_orders_task(...):
-#    ...
+@shared_task(bind=True, default_retry_delay=300, max_retries=5)
+def sync_full_products_task(self):
+    """
+    Celery task to synchronize FULL product data from Upgates XML feed.
+    """
+    logger.info("Starting Upgates FULL product sync task.")
+    try:
+        success = sync_products_from_full_feed()
+        if success:
+            logger.info("Upgates FULL product sync task completed successfully.")
+        else:
+            logger.warning("Upgates FULL product sync task completed with some issues.")
+    except Exception as e:
+        logger.error(f"Upgates FULL product sync task failed: {e}", exc_info=True)
+        raise self.retry(exc=e)
+
+@shared_task(bind=True, default_retry_delay=60, max_retries=3) # Shorter retry for more frequent updates
+def sync_partial_products_task(self):
+    """
+    Celery task to synchronize PARTIAL product data (e.g., stock/price) from Upgates XML feed.
+    """
+    logger.info("Starting Upgates PARTIAL product sync task.")
+    try:
+        success = sync_products_from_partial_feed()
+        if success:
+            logger.info("Upgates PARTIAL product sync task completed successfully.")
+        else:
+            logger.warning("Upgates PARTIAL product sync task completed with some issues.")
+    except Exception as e:
+        logger.error(f"Upgates PARTIAL product sync task failed: {e}", exc_info=True)
+        raise self.retry(exc=e)
