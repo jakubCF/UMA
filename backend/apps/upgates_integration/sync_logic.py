@@ -12,7 +12,7 @@ from .xml_parser import UpgatesProductXMLParser
 
 logger = logging.getLogger(__name__)
 
-def sync_orders_from_api(creation_time_from=None):
+def sync_orders_from_api(creation_time_from=None, status_ids=None):
     """
     Retrieves orders from the Upgates API, optionally filtering by creation_time_from.
     """
@@ -32,7 +32,8 @@ def sync_orders_from_api(creation_time_from=None):
         if creation_time_from:
             # 'creation_time_from' or similar to filter orders
             params['creation_time_from'] = creation_time_from.isoformat()
-
+        if status_ids:
+            params['status_ids'] = status_ids
         try:
             orders_response = client.get_orders(**params)
 
@@ -210,6 +211,118 @@ def sync_orders_from_api(creation_time_from=None):
     logger.info(f"Order synchronization complete. Synced {synced_count} orders.")
     return True
 
+def sync_products_simple_from_api(codes=None):
+    """
+    Retrieves products from the Upgates API, optionally filtering by product_ids
+    """
+    client = UpgatesAPIClient()
+    # Start at page 1 for the API
+    current_page = 1 
+    # Initialize total pages to a value that ensures the loop runs at least once
+    number_of_pages = 1
+
+    synced_count = 0 # Count of successfully synced products
+
+    while current_page <= number_of_pages:
+        params = {'page': current_page} 
+        if codes:
+            params['codes'] = codes
+
+        try:
+            response = client.get_products_simple(**params)
+
+            # --- UPDATED PAGINATION CHECK ---
+            products_list = response.get('products', [])
+            # Update number_of_pages based on the API response, if available
+            # This ensures the loop correctly identifies the total number of pages
+            if 'number_of_pages' in response:
+                number_of_pages = response['number_of_pages']
+            # --------------------------------
+
+            logger.info(f"Retrieved {len(products_list)} products from Upgates API (page {current_page}/{number_of_pages}).")
+
+            if not products_list:
+                # If the current page returns no products, and it's not the last expected page, something might be off,
+                # but if current_page > number_of_pages, the loop will naturally end.
+                break 
+
+            for product_api_data in products_list:
+                try:
+                    with transaction.atomic():
+                        product_code = product_api_data.get('code')
+                        if not product_code:
+                            logger.warning("Skipping product with no code.")
+                            continue
+
+                        # Map API JSON fields to your Django model fields
+                        product_defaults = {
+                            'code_supplier': product_api_data.get('code_supplier'),
+                            'ean': product_api_data.get('ean'),
+                            'product_id': product_api_data.get('product_id'),
+                            'manufacturer': product_api_data.get('manufacturer'),
+                            'availability_id': product_api_data.get('availability_id'),
+                            'availability': product_api_data.get('availability'),
+                            'stock': product_api_data.get('stock', 0),
+                            'stock_position': product_api_data.get('stock_position'),
+                            'weight': product_api_data.get('weight'),
+                            'uma_is_active': True,
+                            'uma_last_synced_at': timezone.now(),
+                        }
+                        # Use the unique code as the identifier
+                        product_obj, created = Product.objects.update_or_create(
+                            code=product_code, # Use 'code' as the unique identifier
+                            defaults=product_defaults
+                        )
+                        if created:
+                            logger.info(f"Created new Product: {product_obj.title} (Code: {product_obj.code})")
+                        else:
+                            logger.debug(f"Updated Product: {product_obj.title} (Code: {product_obj.code})")
+                        
+                        # --- Sync Product Variants ---
+                        variants_data = product_api_data.get('variants', [])
+                        for variant_data in variants_data:
+                            variant_code = variant_data.get('code')
+                            if not variant_code:
+                                logger.warning(f"Skipping variant with no CODE for product {product_code}: {variant_data}")
+                                continue
+
+                            variant_defaults = {
+                                'product': product_obj, # Link to the parent product
+                                'code_supplier': variant_data.get('code_supplier'),
+                                'ean': variant_data.get('ean'),
+                                'variant_id': variant_data.get('variant_id'),
+                                'stock': variant_data.get('stock', 0),
+                                'stock_position': variant_data.get('stock_position'),
+                                'availability_id': variant_data.get('availability_id'),
+                                'availability': variant_data.get('availability'),
+                            }
+                            # Use 'code' as the unique identifier for variant
+                            variant_obj, v_created = ProductVariant.objects.update_or_create(
+                                code=variant_code, # Use 'code' as the unique identifier for variant
+                                defaults=variant_defaults
+                            )
+                            if v_created:
+                                logger.info(f"  Created new Variant: {variant_obj.code} (Product: {product_obj.code})")
+                            else:
+                                logger.debug(f"  Updated Variant: {variant_obj.code} (Product: {product_obj.code})")
+                                
+                        synced_count += 1 # Increment synced count for each product
+                except IntegrityError as ie:
+                    logger.error(f"Integrity error during product sync for product_code {product_code}: {ie}")
+                    # Could happen if multiple syncs create the same product
+                except Exception as e:
+                    logger.error(f"Unhandled error during product sync for product_code {product_code}: {e}")
+                    # Continue to next product even if one fails
+
+            current_page += 1 # Move to the next page
+
+        except Exception as e:
+            logger.error(f"Failed to retrieve products from Upgates API (page {current_page}): {e}")
+            number_of_pages = 0 # Stop on error
+
+    logger.info(f"Product synchronization complete. Synced {synced_count} products.")
+    return True
+
 def sync_products_from_full_feed ():
     """
     Retrieves the full product XML feed, parses it, and syncs products/variants.
@@ -244,8 +357,9 @@ def sync_products_from_full_feed ():
                     'product_id': product_data.get('product_id'),
                     'title': product_data.get('title'),
                     'manufacturer': product_data.get('manufacturer'),
-                    'supplier_code': product_data.get('supplier_code'),
+                    'code_supplier': product_data.get('supplier_code'),
                     'ean': product_data.get('ean'),
+                    'availability_id': None, # TODO: Map this to API /availabilities based on availability text
                     'availability': product_data.get('availability'),
                     'stock': product_data.get('stock', 0),
                     'stock_position': product_data.get('stock_position'),
@@ -280,8 +394,9 @@ def sync_products_from_full_feed ():
                         variant_defaults = {
                             'product': product_obj, # Link to the parent product
                             'variant_id': variant_data.get('variant_id'),
-                            'supplier_code': variant_data.get('supplier_code'),
+                            'code_supplier': variant_data.get('supplier_code'),
                             'ean': variant_data.get('ean'),
+                            'availability_id': None, # TODO: Map this to API /availabilities based on availability text
                             'availability': variant_data.get('availability'),
                             'stock': variant_data.get('stock', 0),
                             'stock_position': variant_data.get('stock_position'),

@@ -3,12 +3,12 @@ from celery import shared_task
 from django.utils import timezone
 import logging
 
-from .sync_logic import sync_products_from_full_feed, sync_products_from_partial_feed, sync_orders_from_api
+from .sync_logic import sync_products_from_full_feed, sync_products_from_partial_feed, sync_orders_from_api, sync_products_simple_from_api
 
 logger = logging.getLogger(__name__)
 
 @shared_task(bind=True, default_retry_delay=300, max_retries=5)
-def sync_orders_task(self, creation_time_from=None):
+def sync_orders_task(self, creation_time_from=None, status_ids=None):
     """
     Celery task to synchronize orders from Upgates API.
     `creation_time_from` can be passed as ISO format string if triggered from API.
@@ -21,8 +21,8 @@ def sync_orders_task(self, creation_time_from=None):
         else:
             # Default to one day ago if no timestamp is provided
             creation_time_from = timezone.now() - timezone.timedelta(days=1)
-        
-        success = sync_orders_from_api(creation_time_from)
+
+        success = sync_orders_from_api(creation_time_from=creation_time_from, status_ids=status_ids)
         if success:
             logger.info("Upgates order sync task completed successfully.")
         else:
@@ -32,11 +32,6 @@ def sync_orders_task(self, creation_time_from=None):
         logger.error(f"Upgates order sync task failed: {e}", exc_info=True)
         raise self.retry(exc=e)
     
-# apps/upgates_integration/tasks.py
-from celery import shared_task
-import logging
-
-logger = logging.getLogger(__name__)
 
 @shared_task
 def debug_task():
@@ -73,4 +68,22 @@ def sync_partial_products_task(self):
             logger.warning("Upgates PARTIAL product sync task completed with some issues.")
     except Exception as e:
         logger.error(f"Upgates PARTIAL product sync task failed: {e}", exc_info=True)
+        raise self.retry(exc=e)
+    
+@shared_task(bind=True, default_retry_delay=300, max_retries=5)
+def sync_products_simple_task(self, codes=None):
+    """
+    Celery task to synchronize products from Upgates API.
+    `codes` can be passed as string if triggered from API.
+    """
+    logger.info("Starting Upgates products sync task.")
+    try:        
+        success = sync_products_simple_from_api(codes)
+        if success:
+            logger.info("Upgates products sync task completed successfully.")
+        else:
+            logger.warning("Upgates products sync task completed with some issues.")
+            # self.retry(countdown=600)
+    except Exception as e:
+        logger.error(f"Upgates products sync task failed: {e}", exc_info=True)
         raise self.retry(exc=e)

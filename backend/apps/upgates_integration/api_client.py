@@ -46,6 +46,9 @@ class UpgatesAPIClient:
         # Fetch orders from Upgates API
         return self._make_request('GET', '/orders', params=kwargs)
 
+    def get_products_simple(self, **kwargs):
+        # Fetch products from Upgates API
+        return self._make_request('GET', '/products/simple', params=kwargs)
 
 
     # Add other methods for specific Upgates API endpoints as needed
