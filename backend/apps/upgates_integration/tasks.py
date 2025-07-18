@@ -3,7 +3,7 @@ from celery import shared_task
 from django.utils import timezone
 import logging
 
-from .sync_logic import sync_products_from_full_feed, sync_products_from_partial_feed, sync_orders_from_api, sync_products_simple_from_api
+from .sync_logic import *
 
 logger = logging.getLogger(__name__)
 
@@ -86,4 +86,22 @@ def sync_products_simple_task(self, codes=None):
             # self.retry(countdown=600)
     except Exception as e:
         logger.error(f"Upgates products sync task failed: {e}", exc_info=True)
+        raise self.retry(exc=e)
+
+@shared_task(bind=True, default_retry_delay=300, max_retries=5)
+def process_stock_adjustments_task(self):
+    """
+    Celery task to process stock adjustments from Upgates API.
+    This will call the sync logic to handle adjustments.
+    """
+    logger.info("Starting Upgates stock adjustments processing task.")
+    try:
+        success = process_stock_adjustments()
+        if success:
+            logger.info("Upgates stock adjustments processing task completed successfully.")
+        else:
+            logger.warning("Upgates stock adjustments processing task completed with some issues.")
+            # self.retry(countdown=600)
+    except Exception as e:
+        logger.error(f"Upgates stock adjustments processing task failed: {e}", exc_info=True)
         raise self.retry(exc=e)

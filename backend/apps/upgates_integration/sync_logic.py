@@ -5,7 +5,7 @@ from django.utils import timezone
 import pytz # Import pytz
 
 from apps.orders.models import Order, OrderItem
-from apps.products.models import Product, ProductVariant
+from apps.products.models import Product, ProductVariant, ProductStockAdjustment
 from .api_client import UpgatesAPIClient
 from .feed_client import UpgatesFeedClient
 from .xml_parser import UpgatesProductXMLParser 
@@ -222,6 +222,15 @@ def sync_products_simple_from_api(codes=None):
     number_of_pages = 1
 
     synced_count = 0 # Count of successfully synced products
+
+    # if codes is list, convert to comma-separated string for API
+    if isinstance(codes, list):
+        codes = ';'.join(codes)
+    elif isinstance(codes, str):
+        # check if it's string of codes separated by semicolons
+        codes = codes.strip().replace(' ', '') # Clean up spaces
+        if ',' in codes:
+            codes = codes.replace(',', ';') # Convert commas to semicolons if needed
 
     while current_page <= number_of_pages:
         params = {'page': current_page} 
@@ -550,4 +559,238 @@ def sync_products_from_partial_feed():
             continue
 
     logger.info(f"PARTIAL Product synchronization complete. Updated {updated_count} existing items.")
+    return True
+
+# --- Core logic for processing stock adjustments ---
+def process_stock_adjustments():
+    """
+    Processes pending stock adjustments from the ProductStockAdjustment table in a batch.
+    1. Collects all pending adjustments.
+    2. Syncs current stock for all relevant items from Upgates API.
+    3. Calculates new stock levels for each.
+    4. Sends a single batch PUT request to Upgates API.
+    5. Updates ProductStockAdjustment records based on batch API response (or success/failure).
+    6. Verifies updates by re-syncing and checking last_synced_at.??? maybe not needed
+    """
+    api_client = UpgatesAPIClient()
+    
+    # Get all pending adjustments. Order by created_at to process oldest first.
+    pending_adjustments = ProductStockAdjustment.objects.filter(status='pending').order_by('created_at')
+    
+    if not pending_adjustments.exists():
+        logger.info("No pending product stock adjustments to process.")
+        return True
+
+    logger.info(f"Found {pending_adjustments.count()} pending product stock adjustments.")
+
+    # Collect all unique codes for the initial sync
+    all_codes_to_sync = set()
+    for adjustment in pending_adjustments:
+        if adjustment.variant:
+            all_codes_to_sync.add(adjustment.variant.code)
+        elif adjustment.product:
+            all_codes_to_sync.add(adjustment.product.code)
+        else:
+            # Log and mark as failed if neither product nor variant is set
+            logger.error(f"ProductStockAdjustment {adjustment.pk} has neither product nor variant set. Marking as failed.")
+            adjustment.status = 'failed'
+            adjustment.error_message = "Neither product nor variant specified."
+            adjustment.save(update_fields=['status', 'error_message'])
+            continue # Skip this adjustment
+
+    if not all_codes_to_sync:
+        logger.info("No valid product/variant codes found in pending adjustments after initial check.")
+        return True
+    
+    logger.info(f"Syncing current stock for {len(all_codes_to_sync)} items from simple API before batch adjustment.")
+    try:
+        sync_success = sync_products_simple_from_api(codes=list(all_codes_to_sync))
+        if not sync_success:
+            # If initial sync fails, we can't reliably calculate new stock.
+            # Mark all relevant adjustments as failed or retry the whole task.
+            raise Exception("Failed to perform initial stock sync from Upgates API. Cannot proceed with adjustments.")
+    except Exception as e:
+        # Mark all currently selected adjustments as failed due to sync error
+        for adjustment in pending_adjustments:
+            # Ensure the adjustment is still pending before marking failed (could have been processed by another task)
+            if adjustment.status == 'pending': 
+                adjustment.status = 'failed'
+                adjustment.error_message = f"Initial stock sync failed: {e}"
+                adjustment.save(update_fields=['status', 'error_message'])
+        logger.error(f"Critical error during initial stock sync for batch adjustments: {e}", exc_info=True)
+        return False # Indicate overall failure
+    
+    # Prepare batch update payload and update adjustment statuses to 'processing'
+    batch_update_payload = []
+    adjustments_to_process = [] # Keep track of adjustments that will be part of the batch
+    
+    # Re-fetch pending adjustments to ensure they are still in 'pending' status
+    # (in case another process tried to grab them between initial fetch and sync)
+    # Using the IDs collected from the initial query.
+    re_fetched_adjustments = ProductStockAdjustment.objects.filter(
+        pk__in=[adj.pk for adj in pending_adjustments],
+        status='pending' # Only consider those still pending
+    ).order_by('created_at').select_for_update()
+
+    for adjustment in re_fetched_adjustments:
+        # Use a nested transaction for each individual adjustment's status update
+        # This allows us to mark individual adjustments as processing/completed/failed
+        # even if the batch API call itself fails for some items.
+        with transaction.atomic():
+            target_obj = None
+            current_local_stock = None
+            item_type_for_api = None
+            target_code = None
+
+            if adjustment.variant:
+                target_obj = ProductVariant.objects.get(pk=adjustment.variant.pk) # Get latest from DB
+                current_local_stock = target_obj.stock
+                item_type_for_api = 'variant'
+                target_code = target_obj.code
+            elif adjustment.product:
+                target_obj = Product.objects.get(pk=adjustment.product.pk) # Get latest from DB
+                current_local_stock = target_obj.stock
+                item_type_for_api = 'product'
+                target_code = target_obj.code
+            else:
+                # Should be caught by earlier clean() or explicit check
+                logger.error(f"Adjustment {adjustment.pk} has no valid target after initial sync. Marking failed.")
+                adjustment.status = 'failed'
+                adjustment.error_message = "No valid product/variant target found."
+                adjustment.save(update_fields=['status', 'error_message'])
+                continue # Skip to next adjustment
+
+            if current_local_stock is None:
+                logger.error(f"Current stock for {target_code} is None after API sync. Marking adjustment {adjustment.pk} as failed.")
+                adjustment.status = 'failed'
+                adjustment.error_message = f"Current stock for {target_code} is null after sync."
+                adjustment.save(update_fields=['status', 'error_message'])
+                continue
+
+            new_stock_level = current_local_stock + adjustment.adjustment_quantity
+            logger.info(f"Preparing adjustment {adjustment.pk} for {target_code}: {current_local_stock} + {adjustment.adjustment_quantity} = {new_stock_level}")
+
+            # Prepare item for batch payload (ASSUMED STRUCTURE)
+            batch_item = {
+                "code": target_code,
+                "stock": new_stock_level,
+                "type": item_type_for_api, # Indicate if it's a product or variant
+            }
+            # # If variant, you might need product_code in the batch item based on Upgates API.
+            # if item_type_for_api == 'variant':
+            #      batch_item['product_code'] = target_obj.product.code # Assumed Upgates requires parent product code for variant updates
+
+            batch_update_payload.append(batch_item)
+            adjustments_to_process.append(adjustment) # Keep track of which adjustment corresponds to which item in payload
+            
+            # Mark as processing (status change will be saved later in this atomic block)
+            adjustment.status = 'processing'
+            adjustment.processed_at = timezone.now()
+            adjustment.save(update_fields=['status', 'processed_at'])
+
+    # If no valid adjustments to process, return early
+    if not batch_update_payload:
+        logger.info("No valid adjustments to process in batch after pre-checks.")
+        return True # Nothing to do
+    
+    # Send batch update to Upgates API
+    try:
+        logger.info(f"Sending batch update to Upgates API for {len(batch_update_payload)} items.")
+        # transform batch_update_payload to match Upgates API expected structure
+        # API expects a list of products with their updated stock and list of variants
+        products = [item for item in batch_update_payload if item['type'] == 'product']
+        varinats = [item for item in batch_update_payload if item['type'] == 'variant']
+
+        if not products:
+            products = None
+        if not varinats:
+            varinats = None
+
+        batch_update_payload = {
+            "products": products,
+            "variants": varinats 
+        }
+
+        response = api_client.put_product_data(data=batch_update_payload)
+        
+        # Check if the response indicates success
+        logger.info(f"Batch update response: {response}")
+
+        if not response:
+            raise Exception("Batch update failed with no success flag in response.")
+    
+    except Exception as e:
+        logger.error(f"Batch update to Upgates API failed: {e}", exc_info=True)
+        # Mark all adjustments as failed due to API error
+        for adjustment in adjustments_to_process:
+            if adjustment.status == 'processing':
+                adjustment.status = 'failed'
+                adjustment.error_message = f"Batch update failed: {e}"
+                adjustment.save(update_fields=['status', 'error_message'])
+        return False
+
+    response_item_lookup = {}
+    for item in response.get('products', []):
+        # Add the product itself to the lookup (if it has a code)
+        if 'code' in item:
+            response_item_lookup[item['code']] = item
+
+        # Add its variants to the lookup
+        if 'variants' in item and item['variants']:
+            for variant in item['variants']:
+                if 'code' in variant:
+                    response_item_lookup[variant['code']] = variant
+    
+    processed_adjustments = []
+    for adjustment in adjustments_to_process:
+        adjustment_code = adjustment.variant.code if adjustment.variant.code else adjustment.product.code
+        if adjustment_code is None:
+            logger.error(f"Adjustment {adjustment} has no valid code after API sync. Marking as failed.")
+            adjustment.status = 'failed'
+            adjustment.error_message = "No valid product/variant code found."
+            adjustment.save(update_fields=['status', 'error_message'])
+            continue
+        corresponding_item = response_item_lookup.get(adjustment_code) # Use .get() to avoid KeyError
+
+        if corresponding_item is None:
+            logger.warning(f"No corresponding item found in API response for adjustment {adjustment.pk} with code '{adjustment_code}'.")
+            adjustment.status = 'failed'
+            adjustment.error_message = f"No corresponding product/variant found in API response for code '{adjustment_code}'."
+            adjustment.save(update_fields=['status', 'error_message'])
+            continue
+
+        if corresponding_item['updated_yn']:
+            logger.info(f"Found match for '{adjustment_code}': {corresponding_item['code']}")
+            processed_adjustments.append({
+                'adjustment': adjustment,
+                'matched_item': corresponding_item
+            })
+            with transaction.atomic():
+                try:
+                    adjustment_item = adjustment.variant if adjustment.variant else adjustment.product
+                    if adjustment_item:
+                        # Update the stock in the local DB
+                        adjustment_item.stock = adjustment_item.stock + adjustment.adjustment_quantity
+                        adjustment_item.save(update_fields=['stock', 'uma_last_synced_at'])
+                except Exception as e:
+                    logger.error(f"Error updating stock for adjustment {adjustment.pk} with code '{adjustment_code}': {e}")
+                    adjustment.status = 'failed'
+                    adjustment.error_message = f"Error updating stock: {e}"
+                    adjustment.save(update_fields=['status', 'error_message'])
+                    continue
+                # Update the adjustment status to 'completed'
+                adjustment.status = 'completed'
+                adjustment.processed_at = timezone.now()
+                adjustment.api_response_data = corresponding_item
+                adjustment.save(update_fields=['status', 'processed_at', 'api_response_data'])
+        if not corresponding_item['updated_yn']:
+            logger.warning(f"Item '{adjustment_code}' was not updated in the API response. Marking adjustment as failed.")
+            adjustment.status = 'failed'
+            adjustment.error_message = f"Item '{adjustment_code}' was not updated in the API response."
+            adjustment.api_response_data = corresponding_item
+            adjustment.save(update_fields=['status', 'error_message', 'api_response_data'])
+
+    if not batch_update_payload:
+        logger.info("No valid adjustments to process in batch after pre-checks.")
+        return True
     return True

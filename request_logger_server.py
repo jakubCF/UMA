@@ -43,6 +43,61 @@ class RequestLoggerHandler(http.server.BaseHTTPRequestHandler):
         response_data = {'message': 'POST request received', 'path': self.path}
         self.wfile.write(json.dumps(response_data).encode('utf-8'))
 
+    def do_PUT(self):
+        logger.info(f"\n--- PUT Request ---")
+        logger.info(f"Path: {self.path}")
+        logger.info(f"Headers:\n{self.headers}")
+
+        # Get content length from headers
+        content_length = int(self.headers.get('Content-Length', 0))
+        
+        # Read request body data
+        request_body = self.rfile.read(content_length)
+
+        logger.info(f"Body: {request_body.decode('utf-8')}")
+        # if request data contains code 'P00018', return dummy orders response
+
+        if b'"P00018-10"' in request_body:
+            dummy_response = {
+                "products": [
+                    {
+                        "code": "P00018",
+                        "product_id": 180,
+                        "updated_yn": True,
+                        "messages": [
+                            {
+                            "object": None,
+                            "property": None,
+                            "message": "",
+                            "level": "info"
+                            }
+                        ],
+                        "variants": [
+                            {
+                                "code": "P00018-10",
+                                "variant_id": 1303,
+                                "updated_yn": True,
+                                "messages": [
+                                    {
+                                    "object": None,
+                                    "property": None,
+                                    "message": "",
+                                    "level": "info"
+                                    }
+                                ],
+                            }
+                        ],
+                    }
+                ]
+            }
+            self._set_headers()
+            self.wfile.write(json.dumps(dummy_response).encode('utf-8'))
+        else:
+            # Default response for other endpoints
+            self._set_headers()
+            response_data = {'message': 'PUT request received', 'path': self.path}
+            self.wfile.write(json.dumps(response_data).encode('utf-8'))
+
     def do_GET(self):
         logger.info(f"\n--- GET Request ---")
         logger.info(f"Path: {self.path}")

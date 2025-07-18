@@ -41,7 +41,7 @@ class SyncDataTriggerAPIView(APIView):
             message = "PARTIAL product synchronization started in background."
         else:
             return Response(
-                {"detail": "Invalid sync type. Must be 'products' or 'orders'."},
+                {"detail": "Invalid sync type. Must be 'products_simple', 'products_full', 'products_partial' or 'orders'."},
                 status=status.HTTP_400_BAD_REQUEST
             )
 

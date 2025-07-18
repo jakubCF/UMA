@@ -33,13 +33,22 @@ class UpgatesAPIClient:
                 method, url, headers=self.headers, params=params, json=json_data, timeout=timeout
             )
             response.raise_for_status() # Raise HTTPError for bad responses (4xx or 5xx)
+            if response.status_code == 204:
+                return {} # Return an empty dict for No Content success
             return response.json() # Assume JSON for most API endpoints
 
         except Timeout:
-            logger.error(f"Upgates API request to {url} timed out.")
+            logger.error(f"Upgates API request to {url} timed out. (Method: {method}).")
             raise
         except RequestException as e:
-            logger.error(f"Error making request to Upgates API: {e} - Response: {getattr(e.response, 'text', 'N/A')}")
+            # Log more details including the request payload if possible
+            request_payload = json_data or params
+            logger.error(
+                f"Error making request to Upgates API (Method: {method}, URL: {url}): {e} - "
+                f"Request Payload: {request_payload} - "
+                f"Response Status: {getattr(e.response, 'status_code', 'N/A')} - "
+                f"Response Body: {getattr(e.response, 'text', 'N/A')}"
+            )
             raise
 
     def get_orders(self, **kwargs):
@@ -50,5 +59,8 @@ class UpgatesAPIClient:
         # Fetch products from Upgates API
         return self._make_request('GET', '/products/simple', params=kwargs)
 
+    def put_product_data(self, data: dict):
+        logger.info(f"Sending PUT request to '/products' with data: {data}")
+        return self._make_request('PUT', '/products', json_data=data)
 
     # Add other methods for specific Upgates API endpoints as needed
