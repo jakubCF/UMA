@@ -101,6 +101,66 @@ Request body:
 }
 ```
 
+## Stock Adjustment
+```http
+POST /stock-adjustments/
+```
+
+Request body for single product using code or id:
+```json
+{
+    "product_code":"P00018",
+    "adjustment_quantity": 99
+}
+```
+
+```json
+{
+    "product":1,
+    "adjustment_quantity": 99
+}
+```
+
+Request body for single variant using code or id:
+```json
+{
+    "variant_code":"P00018-5",
+    "adjustment_quantity": 99
+}
+```
+
+```json
+{
+    "variant":1,
+    "adjustment_quantity": 5
+}
+```
+
+bulk adjustment for given products and variants
+
+Request body for single variant using code:
+```json
+[
+{
+    "variant_code":"P00018-5",
+    "adjustment_quantity": 5
+},
+{
+    "product_code":"P00018",
+    "adjustment_quantity": -18
+},
+{
+    "variant":1,
+    "adjustment_quantity": 5
+},
+{
+    "product":1,
+    "adjustment_quantity": 99
+}
+]
+```
+
+
 ## Orders API
 
 ### List Orders
