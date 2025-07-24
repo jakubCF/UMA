@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser # Or define your own
 from django.utils import timezone
 
-from apps.upgates_integration.tasks import sync_orders_task, sync_full_products_task, sync_partial_products_task, sync_products_simple_task
+from apps.upgates_integration.tasks import *
 from apps.djangocore.utils import get_app_setting
 
 class SyncDataTriggerAPIView(APIView):
@@ -39,6 +39,9 @@ class SyncDataTriggerAPIView(APIView):
         elif data_type == 'products_partial':
             sync_partial_products_task.delay()
             message = "PARTIAL product synchronization started in background."
+        elif data_type == 'update_stock':
+            process_stock_adjustments_task.delay()
+            message = "Stock adjustments synchronization started in background."
         else:
             return Response(
                 {"detail": "Invalid sync type. Must be 'products_simple', 'products_full', 'products_partial' or 'orders'."},
