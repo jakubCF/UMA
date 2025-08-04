@@ -35,7 +35,7 @@ def sync_orders_from_api(creation_time_from=None, status_ids=None):
         if status_ids:
             params['status_ids'] = status_ids
         try:
-            orders_response = client.get_orders(**params)
+            orders_response, return_code = client.get_orders(**params)
 
             # --- UPDATED PAGINATION CHECK ---
             orders_list = orders_response.get('orders', []) # Actual list of order data
@@ -133,7 +133,7 @@ def sync_orders_from_api(creation_time_from=None, status_ids=None):
 
                             # Your internal fields
                             # 'pg_status': This would be updated by your fullfilment logic
-                            'pg_updated_at': timezone.now(),
+                            'uma_updated_at': timezone.now(),
                         }
                         order_obj, created = Order.objects.update_or_create(
                             order_number=order_number, # Use a unique external identifier
@@ -211,6 +211,38 @@ def sync_orders_from_api(creation_time_from=None, status_ids=None):
     logger.info(f"Order synchronization complete. Synced {synced_count} orders.")
     return True
 
+def sync_orders_status_to_api(orderids, status_id):
+    client = UpgatesAPIClient()
+
+    if not status_id:
+        logger.error("No status_id provided for order status update.")
+        return False
+    if not isinstance(orderids, list):
+        logger.warning(f"Order IDs provided are not a list: {orderids}")
+        return False
+    
+    data = {'send_emails_yn': False, 'send_sms_yn': False, 'orders': []}
+
+    for order_id in orderids:
+        try:
+            order = Order.objects.get(id=order_id)
+            data['orders'].append({
+                'order_number': order.order_number,
+                'status_id': status_id,
+            })
+        except Order.DoesNotExist:
+            logger.error(f"Order with ID {order_id} does not exist.")
+            continue
+
+    response, return_code = client.put_order_data(data)
+
+    if return_code == 200:
+        logger.info(f"Successfully updated order statuses in Upgates API for orders: {orderids}")
+        return True
+    else:
+        logger.error(f"Failed to update order statuses in Upgates API: {response.get('error', 'Unknown error')}")
+        return False
+
 def sync_products_simple_from_api(codes=None):
     """
     Retrieves products from the Upgates API, optionally filtering by product_ids
@@ -238,7 +270,7 @@ def sync_products_simple_from_api(codes=None):
             params['codes'] = codes
 
         try:
-            response = client.get_products_simple(**params)
+            response, return_code = client.get_products_simple(**params)
 
             # --- UPDATED PAGINATION CHECK ---
             products_list = response.get('products', [])
@@ -711,7 +743,7 @@ def process_stock_adjustments():
             "variants": varinats 
         }
 
-        response = api_client.put_product_data(data=batch_update_payload)
+        response, return_code = api_client.put_product_data(data=batch_update_payload)
         
         # Check if the response indicates success
         logger.info(f"Batch update response: {response}")

@@ -28,6 +28,11 @@ class SyncDataTriggerAPIView(APIView):
             
             sync_orders_task.delay(creation_time_from=creation_time_from_str, status_ids=status_ids)#creation_time_from=creation_time_from_str)
             message = "Order synchronization started in background."
+        elif data_type == 'orders_status':
+            orderids = request.data.get('orderids')
+            status_id = request.data.get('statusid')
+            sync_orders_status_to_api_task.delay(orderids=orderids, status_id=status_id)
+            message = "Order status synchronization started in background."
         elif data_type == 'products_simple':
             # Trigger simple product sync task
             data_codes = request.data.get('codes') # Optional, e.g., "code1;code2;code3"

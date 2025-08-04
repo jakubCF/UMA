@@ -13,5 +13,6 @@ urlpatterns = [
     path('sync/', upgates_integ_views.SyncDataTriggerAPIView.as_view(), name='sync_endpoint'),
     path('orders/', order_views.OrderListCreateView.as_view(), name='order-list-create'),
     path('orders/<int:pk>/', order_views.OrderDetailView.as_view(), name='order-detail'),
+    path('orders/<int:order_pk>/items/<int:item_pk>/status/', order_views.OrderItemStatusView.as_view(), name='order-item-status'),
     path('', include(router.urls)),
 ]

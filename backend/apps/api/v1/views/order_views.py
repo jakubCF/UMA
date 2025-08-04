@@ -27,10 +27,30 @@ class OrderDetailView(APIView):
         order = self.get_object(pk)
         serializer = OrderSerializer(order)
         return Response(serializer.data)
+    
+    def patch(self, request, pk):
+        order = self.get_object(pk)
+        serializer = OrderSerializer(order, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def put(self, request, pk):
         order = self.get_object(pk)
         serializer = OrderSerializer(order, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class OrderItemStatusView(APIView):
+    def get_object(self, order_pk, item_pk):
+        return get_object_or_404(OrderItem, order__pk=order_pk, pk=item_pk)
+
+    def patch(self, request, order_pk, item_pk):
+        item = self.get_object(order_pk, item_pk)
+        serializer = OrderItemSerializer(item, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
