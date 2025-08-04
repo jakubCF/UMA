@@ -49,3 +49,9 @@ process_stock_adjustments_task.delay() # for celery test
 process_stock_adjustments_task() # w/o celery
 ```
 
+## Frontend
+
+```bash
+cd .\frontend\
+npm start
+```

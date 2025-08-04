@@ -6,8 +6,11 @@ __pycache__/
 *.sqlite3
 *.log
 outline.md
+package-lock.json
 
 # ignore all migrations except 
 migrations/
 !apps/djangocore/migrations/0002_init_app_settings.py
 
+# ignore node_modules
+node_modules/

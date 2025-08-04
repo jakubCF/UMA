@@ -181,6 +181,17 @@ PUT /orders/{id}/
 ```
 Update an existing order.
 
+### Update status of item
+```http
+PATCH /api/v1/orders/{id}/items/{itemid}/status/
+
+Request body
+```json
+{
+ "uma_picked": "picked"
+}
+```
+
 ## Response Formats
 
 ### Success Response
