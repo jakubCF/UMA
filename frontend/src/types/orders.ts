@@ -1,5 +1,5 @@
 export type OrderStatus = 'processing' | 'packed' | 'label_pending' | 'label_created' | 'label_printed' | 'completed' | 'cancelled' | 'error';
-export type PickStatus = 'not_picked' | 'picked' | 'unavailable';
+export type PickStatus = 'not_picked' | 'picked' | 'partially_picked' | 'unavailable';
 
 export interface OrderItem {
   id: number;

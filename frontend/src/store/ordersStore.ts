@@ -16,6 +16,8 @@ interface OrdersState {
   filteredOrders: () => Order[];
   updateItemPicked: (orderId: number, itemId: number, pickedQty: number) => Promise<void>;
   updateOrderStatus: (orderId: number, status?: OrderStatus) => Promise<void>;
+  fetchOrdersfromAPI: () => Promise<void>;
+  syncPackedOrders: () => Promise<void>;
 }
 
 export const useOrdersStore = create<OrdersState>((set, get) => ({
@@ -109,4 +111,27 @@ export const useOrdersStore = create<OrdersState>((set, get) => ({
       set({ error: 'Failed to complete order' });
     }
   },
+  fetchOrdersfromAPI: async () => {
+    // send POST request to sync orders from API
+    set({ isLoading: true, error: null });
+    try {
+      await ordersApi.syncOrdersTask();
+      const response = await ordersApi.getOrders();
+      set({ isLoading: false});
+    }
+    catch (error) {
+      set({ error: 'Failed to sync orders', isLoading: false });
+    }
+  },
+  syncPackedOrders: async () => {
+    // send POST request to sync orders status from API
+    set({ isLoading: true, error: null });
+    try {
+      await ordersApi.syncPackedOrders();
+      const response = await ordersApi.getOrders();
+      set({ isLoading: false });
+    } catch (error) {
+      set({ error: 'Failed to sync orders status', isLoading: false });
+    }
+  }
 }));

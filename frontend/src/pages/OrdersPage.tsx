@@ -2,6 +2,7 @@ import { Grid, Paper, IconButton, Box } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import ListIcon from '@mui/icons-material/List';
+import Button from '@mui/material/Button';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useOrdersStore } from '../store/ordersStore';
 import OrdersList from '../components/orders/OrdersList';
@@ -22,6 +23,15 @@ const ToggleButton = styled(Box)(({ theme }) => ({
   }
 }));
 
+const fetchOrdersfromAPI = () => {
+  const { fetchOrdersfromAPI } = useOrdersStore.getState();
+  fetchOrdersfromAPI();
+};
+const syncPackedOrders = () => {
+  const { syncPackedOrders } = useOrdersStore.getState();
+  syncPackedOrders();
+};
+
 export const OrdersPage = () => {
   const { selectedOrderId } = useOrdersStore();
   const [isListOpen, setIsListOpen] = useState(true);
@@ -35,31 +45,43 @@ export const OrdersPage = () => {
 
   return (
     <Box sx={{ position: 'relative' }}>
-      <Grid container spacing={2}>
-        <Grid 
-          item 
-          sx={{ 
-            width: isListOpen ? '25%' : 0,
-            transition: 'width 0.3s ease',
-            overflow: 'hidden'
-          }}
-        >
-          <Paper sx={{ 
-            p: 2, 
-            height: '85vh', 
-            overflow: 'auto',
-            visibility: isListOpen ? 'visible' : 'hidden'
-          }}>
-            <OrdersList />
+      <Grid container spacing={2} sx={{ mb: 2 }}>
+        <Grid item xs={12}>
+          <Paper sx={{ p: 2 }}>
+            <Button sx={{ mr: 1 }} 
+              color="warning"
+              onClick={fetchOrdersfromAPI}
+              variant="contained">
+                Check for new orders
+            </Button>
+            <Button
+              color="success"
+              onClick={syncPackedOrders}
+              variant="contained">
+                Sync packed orders
+            </Button>
           </Paper>
         </Grid>
+      </Grid>
+      <Grid container spacing={2}>
+        {isListOpen && (
+          <Grid item xs={3}> {/* When visible, takes 3 columns */}
+            <Paper sx={{
+              p: 2,
+              height: '75vh',
+              overflow: 'auto',
+            }}>
+              <OrdersList />
+            </Paper>
+          </Grid>
+        )}
         <Grid item xs={isListOpen ? 4 : 4}>
-          <Paper sx={{ p: 2, height: '85vh', overflow: 'auto' }}>
+          <Paper sx={{ p: 2, height: '75vh', overflow: 'auto' }}>
             <OrderDetail />
           </Paper>
         </Grid>
-        <Grid item xs={isListOpen ? 5 : 7}>
-          <Paper sx={{ p: 2, height: '85vh', overflow: 'auto' }}>
+        <Grid item xs={isListOpen ? 5 : 8}>
+          <Paper sx={{ p: 2, height: '75vh', overflow: 'auto' }}>
             <OrderItems />
           </Paper>
         </Grid>
