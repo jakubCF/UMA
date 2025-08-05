@@ -181,9 +181,22 @@ PUT /orders/{id}/
 ```
 Update an existing order.
 
+### Update Order partialy
+```http
+PATCH /orders/{id}/
+```
+
+Request body for single order change:
+```json
+{
+    "uma_status": "packed"
+}
+```
+
 ### Update status of item
 ```http
 PATCH /api/v1/orders/{id}/items/{itemid}/status/
+```
 
 Request body
 ```json
@@ -191,6 +204,85 @@ Request body
  "uma_picked": "picked"
 }
 ```
+
+## Sync requests
+
+### Orders Sync from API
+
+```http
+POST /api/v1/sync
+```
+
+Request body
+```json
+{
+ "type": "orders"
+}
+```
+
+### Orders Sync Status to API
+
+```http
+POST /api/v1/sync
+```
+
+Request body
+```json
+{"type":"orders_status",
+"orderids": [3,4],
+"statusid": 21
+}
+```
+
+### Products Sync from API
+
+```http
+POST /api/v1/sync
+```
+
+Request body
+```json
+{"type":"products_simple",
+"codes":"P00147-5;P00170"
+}
+```
+
+### Products Full Load XML
+
+```http
+POST /api/v1/sync
+```
+
+Request body
+```json
+{"type":"products_full"
+}
+```
+
+### Products Partial (quantities) Load XML
+
+```http
+POST /api/v1/sync
+```
+
+Request body
+```json
+{"type":"products_partial"
+}
+```
+
+### Update Stock data adjustment to Upgates
+
+```http
+POST /api/v1/sync
+```
+
+Request body
+```json
+{"type":"update_stock"
+}
+```
+
 
 ## Response Formats
 
