@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { getCsrfToken } from '../utils/csrf';
 
 const api = axios.create({
   baseURL: 'http://localhost:8000/api/v1',  // adjust to match your Django backend URL
@@ -7,6 +8,28 @@ const api = axios.create({
   },
   withCredentials: true, // Enable CORS credentials
 });
+
+api.interceptors.request.use(
+  (config) => {
+    // Only add CSRF token for non-GET requests
+    if (config.method && !['get', 'head', 'options'].includes(config.method.toLowerCase())) {
+      const csrfToken = getCsrfToken();
+      if (csrfToken) {
+        // Common headers for CSRF tokens
+        // Use 'X-CSRFToken' for Django, 'X-XSRF-TOKEN' for some other frameworks
+        // Check your backend's expected header name
+        config.headers['X-CSRFToken'] = csrfToken; 
+      } else {
+        // console.warn('CSRF token not found for non-GET request!');
+        // Optionally, you could throw an error or handle it more explicitly
+      }
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 // Add response interceptor for error handling
 api.interceptors.response.use(
