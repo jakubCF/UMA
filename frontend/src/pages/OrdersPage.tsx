@@ -8,6 +8,7 @@ import { useOrdersStore } from '../store/ordersStore';
 import OrdersList from '../components/orders/OrdersList';
 import OrderDetail from '../components/orders/OrderDetail';
 import OrderItems from '../components/orders/OrderItems';
+import { useTranslation } from 'react-i18next';
 
 const ToggleButton = styled(Box)(({ theme }) => ({
   position: 'fixed',
@@ -33,6 +34,7 @@ const syncPackedOrders = () => {
 };
 
 export const OrdersPage = () => {
+  const { t } = useTranslation();
   const { selectedOrderId } = useOrdersStore();
   const [isListOpen, setIsListOpen] = useState(true);
 
@@ -52,13 +54,13 @@ export const OrdersPage = () => {
               color="warning"
               onClick={fetchOrdersfromAPI}
               variant="contained">
-                Check for new orders
+              {t('check_new_orders')}
             </Button>
             <Button
               color="success"
               onClick={syncPackedOrders}
               variant="contained">
-                Sync packed orders
+              {t('sync_packed_orders')}
             </Button>
           </Paper>
         </Grid>

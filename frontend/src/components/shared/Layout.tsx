@@ -1,7 +1,9 @@
 import { Box, AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
+  const { t } = useTranslation();
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -10,10 +12,10 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             Merinozky Management
           </Typography>
           <Button color="inherit" component={Link} to="/orders">
-            Orders
+            {t('orders_menu')}
           </Button>
           <Button color="inherit" component={Link} to="/products">
-            Products
+            {t('products_menu')}
           </Button>
         </Toolbar>
       </AppBar>

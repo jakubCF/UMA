@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useOrdersStore } from '../../store/ordersStore';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { green } from '@mui/material/colors';
+import { useTranslation } from 'react-i18next';
 
 
 // Helper function to format each parameter string
@@ -16,6 +17,7 @@ const formatParameterString = (key: string, value: any) => {
 };
 
 const OrderItems = () => {
+  const { t } = useTranslation();
   const { selectedOrder, updateItemPicked } = useOrdersStore();
   const [pickedQuantities, setPickedQuantities] = useState<Record<number, number>>({});
 
@@ -29,13 +31,13 @@ const OrderItems = () => {
   };
 
   if (!selectedOrder()) {
-    return <Typography>Select an order to view items</Typography>;
+    return <Typography>{t('select_order_items')}</Typography>;
   }
 
   return (
     // set box to max-height to display and enable scrolling
     <Box>
-      <Typography variant="h6" gutterBottom>Order Items</Typography>
+      <Typography variant="h6" gutterBottom>{t('order_items')}</Typography>
       <Grid container spacing={2}>
         {selectedOrder()!.items.map((item) => (
           <Grid item xs={12} key={item.id}>
@@ -59,7 +61,7 @@ const OrderItems = () => {
                     <Grid container sx={{ height: '100%' }}>
                       {/* Left Column: All the main item details */}
                       <Grid item xs={7}>
-                        <Typography variant="subtitle1">Code: {item.code}</Typography>
+                        <Typography variant="subtitle1">{t('code')} {item.code}</Typography>
                         <Typography variant="body2">{item.title}</Typography>
                         
                         {/* The new way to display parameters, each on its own line */}
@@ -108,7 +110,7 @@ const OrderItems = () => {
                           >
                             {/* Bottom-right quantity selector */}
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                              <Typography variant="body2" fontSize={"14pt"}>Picked:</Typography>
+                              <Typography variant="body2" fontSize={"14pt"}>{t('picked')}</Typography>
                               <IconButton 
                                 size="small"
                                 onClick={() => handlePickedChange(item.id, (pickedQuantities[item.id] || 0) - 1)}
@@ -132,7 +134,7 @@ const OrderItems = () => {
                             </Box>
                             
                             {/* Status Typography - This is now in the correct place */}
-                            <Typography variant="body2">Status: {item.uma_picked}</Typography>
+                            <Typography variant="body2">{t('status')} {t(`status_${item.uma_picked}`)}</Typography>
                           </Box>
                         </Box>
                       </Grid>

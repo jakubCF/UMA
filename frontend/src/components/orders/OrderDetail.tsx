@@ -1,12 +1,14 @@
 import { Box, Typography, Divider, Button } from '@mui/material';
 import { useOrdersStore } from '../../store/ordersStore';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { useTranslation } from 'react-i18next';
 
 const OrderDetail = () => {
+  const { t } = useTranslation();
   const { selectedOrder, updateOrderStatus, filteredOrders, setSelectedOrderId } = useOrdersStore();
 
   if (!selectedOrder()) {
-    return <Typography>Select an order to view details</Typography>;
+    return <Typography>{t('select_order_details')}</Typography>;
   }
 
   const order = selectedOrder()!;
@@ -36,25 +38,25 @@ const OrderDetail = () => {
       <Divider sx={{ my: 2 }} />
       
       <Typography variant="body1" gutterBottom>
-        <strong>Delivery Method:</strong> {order.shipment?.name || 'No delivery method'}
+        <strong>{t('delivery_method')}</strong> {order.shipment?.name || 'No delivery method'}
       </Typography>
       <Typography variant="body1" gutterBottom>
-        <strong>Total Price:</strong> {order.order_total} CZK
+        <strong>{t('total_price')}</strong> {order.order_total} CZK
       </Typography>
       <Typography variant="body1" gutterBottom>
-        <strong>Total quantity:</strong> {order.items.reduce((sum, item) => sum + Number(item.quantity), 0.00)}
+        <strong>{t('total_quantity')}</strong> {order.items.reduce((sum, item) => sum + Number(item.quantity), 0.00)}
       </Typography>
 
       <Box sx={{ mt: 2 }}>
         <Typography variant="body2" color="text.secondary" component="div">
-          <strong>Customer Note:</strong>
+          <strong>{t('customer_note')}</strong>
           <Box sx={{ mt: 1 }}>{order.customer?.customer_note || 'No customer note'}</Box>
         </Typography>
       </Box>
       
       <Box sx={{ mt: 2 }}>
         <Typography variant="body2" color="text.secondary" component="div">
-          <strong>Internal Note:</strong>
+          <strong>{t('internal_note')}</strong>
           <Box sx={{ mt: 1 }}>{order.internal_note || 'No internal note'}</Box>
         </Typography>
       </Box>
@@ -67,7 +69,7 @@ const OrderDetail = () => {
           startIcon={isOrderPacked ? <CheckCircleIcon /> : null}
           fullWidth
         >
-          {isOrderPacked ? 'Order Packed' : 'Mark as Packed & Load Next'}
+          {isOrderPacked ? t('order_completed') : t('mark_completed_load_next')}
         </Button>
 
       </Box>

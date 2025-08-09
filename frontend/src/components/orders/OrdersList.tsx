@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { List, ListItem, ListItemButton, ListItemText, Typography, CircularProgress, Alert, Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useOrdersStore } from '../../store/ordersStore';
+import { useTranslation } from 'react-i18next';
 
 const OrdersList = () => {
+  const { t } = useTranslation();
   const { filteredOrders, selectedOrderId, setSelectedOrderId, isLoading, error, fetchOrders, filterStatus, setFilterStatus } = useOrdersStore();
 
   useEffect(() => {
@@ -20,7 +22,7 @@ const OrdersList = () => {
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-        <Typography variant="h6">Orders</Typography>
+        <Typography variant="h6">{t('orders')}</Typography>
         <FormControl size="small" sx={{ minWidth: 120 }}>
           <InputLabel>Status</InputLabel>
           <Select
@@ -28,11 +30,11 @@ const OrdersList = () => {
             label="Status"
             onChange={(e) => setFilterStatus(e.target.value)}
           >
-            <MenuItem value="processing">Processing</MenuItem>
-            <MenuItem value="packed">Packed</MenuItem>
-            <MenuItem value="completed">Completed</MenuItem>
-            <MenuItem value="cancelled">Cancelled</MenuItem>
-            <MenuItem value="">All</MenuItem>
+            <MenuItem value="processing">{t('processing')}</MenuItem>
+            <MenuItem value="packed">{t('packed')}</MenuItem>
+            <MenuItem value="completed">{t('completed')}</MenuItem>
+            <MenuItem value="cancelled">{t('cancelled')}</MenuItem>
+            <MenuItem value="">{t('all')}</MenuItem>
           </Select>
         </FormControl>
       </Box>
@@ -44,8 +46,8 @@ const OrdersList = () => {
               onClick={() => setSelectedOrderId(order.id)}
             >
               <ListItemText 
-                primary={`Order #${order.order_number}`}
-                secondary={`Delivery: ${order.shipment?.name || 'No delivery method'}`}
+                primary={t('order') + ` ${order.order_number}`}
+                secondary={t('delivery:') + ` ${order.shipment?.name || 'No delivery method'}`}
               />
             </ListItemButton>
           </ListItem>
