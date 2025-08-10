@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 import os
 import sys
 from pathlib import Path
+from celery.schedules import crontab
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -148,3 +149,12 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
+
+CELERY_BEAT_SCHEDULE = {
+    'run-hourly-task': {
+        'task': 'apps.upgates_integration.tasks.sync_orders_task',
+        # Schedule the task to run at the start of every hour
+        'schedule': crontab(minute=0),
+        'args': (), # Optional arguments for your task
+    },
+}
