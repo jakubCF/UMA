@@ -51,7 +51,7 @@ export const ordersApi = {
     api.patch(`/orders/${orderId}/`, data),
   updateOrderItemStatus: (orderId: number, itemId: number, data: { uma_picked: string }) => 
     api.patch(`/orders/${orderId}/items/${itemId}/status/`, data),
-  syncOrdersTask: () => api.post('/sync/', {"type": "orders"}),
+  syncOrdersTask: () => api.post('/sync/', {"type": "orders", "creation_time_from": new Date().getDate() - 14}),
   syncPackedOrders: (orderids:number[]) => api.post('/sync/', {"type": "orders_status", "orderids":orderids, "statusid": 21, }),
 };
 
