@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { getCsrfToken } from '../utils/csrf';
+import dayjs from 'dayjs';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '/api/v1';
 
@@ -51,7 +52,7 @@ export const ordersApi = {
     api.patch(`/orders/${orderId}/`, data),
   updateOrderItemStatus: (orderId: number, itemId: number, data: { uma_picked: string }) => 
     api.patch(`/orders/${orderId}/items/${itemId}/status/`, data),
-  syncOrdersTask: () => api.post('/sync/', {"type": "orders", "creation_time_from": new Date().getDate() - 14}),
+  syncOrdersTask: () => api.post('/sync/', {"type": "orders", "creation_time_from": dayjs().subtract(14, 'day').format('YYYY-MM-DD')}),
   syncPackedOrders: (orderids:number[]) => api.post('/sync/', {"type": "orders_status", "orderids":orderids, "statusid": 21, }),
 };
 
