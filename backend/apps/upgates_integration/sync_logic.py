@@ -9,6 +9,7 @@ from apps.products.models import Product, ProductVariant, ProductStockAdjustment
 from .api_client import UpgatesAPIClient
 from .feed_client import UpgatesFeedClient
 from .xml_parser import UpgatesProductXMLParser 
+from apps.orders.constants import OrderStatus
 
 logger = logging.getLogger(__name__)
 
@@ -238,6 +239,16 @@ def sync_orders_status_to_api(orderids, status_id):
 
     if return_code == 200:
         logger.info(f"Successfully updated order statuses in Upgates API for orders: {orderids}")
+        # TODO: parse response and update local order statuses for orders in response
+        for order_id in orderids:
+            try:
+                order = Order.objects.get(id=order_id)
+                order.uma_status = OrderStatus.COMPLETED
+                order.uma_updated_at = timezone.now()
+                order.save(update_fields=['uma_status', 'uma_updated_at']) # Update only the status and timestamp
+            except Order.DoesNotExist:
+                logger.error(f"Order with ID {order_id} does not exist for status update.")
+                continue
         return True
     else:
         logger.error(f"Failed to update order statuses in Upgates API: {response.get('error', 'Unknown error')}")

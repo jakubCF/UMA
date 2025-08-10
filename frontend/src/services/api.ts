@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { getCsrfToken } from '../utils/csrf';
 
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '/api/v1';
+
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api/v1',  // adjust to match your Django backend URL
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -50,7 +52,7 @@ export const ordersApi = {
   updateOrderItemStatus: (orderId: number, itemId: number, data: { uma_picked: string }) => 
     api.patch(`/orders/${orderId}/items/${itemId}/status/`, data),
   syncOrdersTask: () => api.post('/sync/', {"type": "orders"}),
-  syncPackedOrders: () => api.post('/sync/', {"type": "orders_status", "orderids":[], "statusid": 21, }),
+  syncPackedOrders: (orderids:number[]) => api.post('/sync/', {"type": "orders_status", "orderids":orderids, "statusid": 21, }),
 };
 
 export default api;

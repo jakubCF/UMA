@@ -51,7 +51,8 @@ process_stock_adjustments_task() # w/o celery
 
 ## Frontend
 
-```bash
+```powershell
 cd .\frontend\
+$env:REACT_APP_API_BASE_URL="http://localhost:8000/api/v1"
 npm start
 ```

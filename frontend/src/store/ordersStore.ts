@@ -2,6 +2,10 @@ import { create } from 'zustand';
 import { Order, OrderStatus } from '../types/orders';
 import { ordersApi } from '../services/api';
 
+// Define polling constants
+const POLLING_INTERVAL = 5000; // Poll every 5 seconds
+const MAX_POLLING_ATTEMPTS = 12; // Max 12 attempts (1 minute total polling time)
+
 interface OrdersState {
   orders: Order[];
   selectedOrderId: number | null;
@@ -116,7 +120,7 @@ export const useOrdersStore = create<OrdersState>((set, get) => ({
     set({ isLoading: true, error: null });
     try {
       await ordersApi.syncOrdersTask();
-      const response = await ordersApi.getOrders();
+      await get().fetchOrders();
       set({ isLoading: false});
     }
     catch (error) {
@@ -126,12 +130,60 @@ export const useOrdersStore = create<OrdersState>((set, get) => ({
   syncPackedOrders: async () => {
     // send POST request to sync orders status from API
     set({ isLoading: true, error: null });
+    let  orderIdsToSync: number[] = [];
+    const initialStatus = 'packed';
     try {
-      await ordersApi.syncPackedOrders();
-      const response = await ordersApi.getOrders();
-      set({ isLoading: false });
+      const currentOrders = get().orders; // Use current state for IDs to sync
+      orderIdsToSync = currentOrders
+        .filter((order: Order) => order.uma_status === initialStatus)
+        .map((order: Order) => order.id);
+
+      if (orderIdsToSync.length === 0) {
+        set({ isLoading: false, error: 'No packed orders to sync.' });
+        return;
+      }
+      // 2. Send POST request to backend to initiate Celery task
+      await ordersApi.syncPackedOrders(orderIdsToSync);
+
+      // 3. Start Polling for status updates
+      let attempts = 0;
+      const pollInterval = setInterval(async () => {
+        attempts++;
+        console.log(`Polling for order status updates... Attempt ${attempts}`);
+
+        try {
+          await get().fetchOrders(); // Re-fetch all orders to check their statuses
+          const updatedOrders = get().orders;
+
+          // Check if all originally synced orders have changed their status
+          const allSynced = orderIdsToSync.every(id => {
+            const order = updatedOrders.find(o => o.id === id);
+            // Assuming 'completed' is the final status after syncing
+            return order && order.uma_status !== initialStatus; 
+          });
+
+          if (allSynced) {
+            clearInterval(pollInterval);
+            set({ isLoading: false, error: null });
+            console.log('All packed orders successfully synced and updated.');
+          } else if (attempts >= MAX_POLLING_ATTEMPTS) {
+            clearInterval(pollInterval);
+            set({ isLoading: false, error: 'Timed out waiting for orders to sync.' });
+            console.error('Polling timed out.');
+          }
+        } catch (pollError) {
+          console.error('Error during polling:', pollError);
+          // Don't stop polling on a single fetch error, but log it
+          if (attempts >= MAX_POLLING_ATTEMPTS) {
+            clearInterval(pollInterval);
+            set({ isLoading: false, error: 'Failed to sync orders due to repeated errors.' });
+          }
+        }
+      }, POLLING_INTERVAL);
+
     } catch (error) {
-      set({ error: 'Failed to sync orders status', isLoading: false });
+      set({ error: 'Failed to initiate order sync or handle polling.', isLoading: false });
+      console.error('Error in syncPackedOrders:', error);
     }
   }
 }));
