@@ -23,13 +23,16 @@ const OrderDetail = () => {
       if (filtered.length !== 0){
         setSelectedOrderId(filtered[0].id);
       }
+      else {
+        setSelectedOrderId(null);
+      }
       })
       .catch(error => {
         console.error('Failed to mark order as packed:', error);
       });
   };
 
-  const isOrderPacked = order.status === 'packed'; // Assuming 'order.status' exists
+  const isOrderProcessing = order.uma_status === "processing"; // Assuming 'order.status' exists
 
 
   return (
@@ -65,11 +68,11 @@ const OrderDetail = () => {
           variant="contained"
           color="success"
           onClick={handleCompleteAndLoadNext}
-          disabled={isOrderPacked} // Disable button if the order is already completed
-          startIcon={isOrderPacked ? <CheckCircleIcon /> : null}
+          disabled={!isOrderProcessing} // Disable button if the order is already completed
+          startIcon={isOrderProcessing ? null : <CheckCircleIcon />}
           fullWidth
         >
-          {isOrderPacked ? t('order_completed') : t('mark_completed_load_next')}
+          {isOrderProcessing ? t('mark_completed_load_next') : t('order_completed')}
         </Button>
 
       </Box>

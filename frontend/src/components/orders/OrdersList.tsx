@@ -47,7 +47,7 @@ const OrdersList = () => {
             >
               <ListItemText 
                 primary={t('order') + ` ${order.order_number}`}
-                secondary={t('delivery:') + ` ${order.shipment?.name || 'No delivery method'}`}
+                secondary={t('delivery') + ` ${order.shipment?.name || 'No delivery method'}`}
               />
             </ListItemButton>
           </ListItem>
