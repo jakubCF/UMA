@@ -15,18 +15,23 @@ i18n
   // init i18next
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
-    fallbackLng: 'en', // default language if the detected one is not available
-    debug: true, // Set to false in production
+    fallbackLng: 'en', // Default language if a specific one isn't found
+    debug: true, // Keep this true during development for helpful console logs
     
     interpolation: {
-      escapeValue: false, // not needed for React as it escapes by default
+      escapeValue: false,
     },
     
-    ns: ['translation'], // default namespace, you can add more if you have different sections
+    ns: ['translation'], // Your default namespace
     defaultNS: 'translation',
 
+    // --- CRITICAL CHANGE HERE ---
+    // This tells i18next to only use the language part (e.g., 'cs' from 'cs-CZ')
+    // when looking for translation files.
+    load: 'languageOnly', 
+
     react: {
-      useSuspense: false // Set to true if you implement React.Suspense
+      useSuspense: false 
     }
   });
 
