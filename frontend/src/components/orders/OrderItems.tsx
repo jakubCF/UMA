@@ -1,7 +1,7 @@
-import { Box, Typography, Grid, Card, CardContent, CardMedia, TextField, IconButton } from '@mui/material';
+import { Box, Typography, Grid, Card, CardContent, CardMedia, TextField, IconButton, Snackbar, Alert } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useOrdersStore } from '../../store/ordersStore';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { green } from '@mui/material/colors';
@@ -21,13 +21,124 @@ const OrderItems = () => {
   const { selectedOrder, updateItemPicked } = useOrdersStore();
   const [pickedQuantities, setPickedQuantities] = useState<Record<number, number>>({});
 
-  const handlePickedChange = (itemId: number, value: number) => {
+  // State for Snackbar messages
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'info' | 'error' | 'warning'>('info');
+
+  // State for barcode scanner input buffer
+  const [scanBuffer, setScanBuffer] = useState<string>('');
+  const SCAN_DEBOUNCE_MS = 100; // Small debounce for scanner input
+
+  // Initialize pickedQuantities when selectedOrder changes
+  useEffect(() => {
+    if (selectedOrder()) {
+      const initialQuantities: Record<number, number> = {};
+      selectedOrder()!.items.forEach(item => {
+        // Initialize from actual picked quantity if available, otherwise 0
+        // Or if 'uma_picked' status implies a full quantity, use that.
+        // Assuming you track actual picked count somewhere, or it's implicitly 0 unless 'picked'
+        initialQuantities[item.id] = 0; // Default to 0, quantities updated via scanner
+      });
+      setPickedQuantities(initialQuantities);
+    } else {
+      setPickedQuantities({}); // Clear quantities if no order selected
+    }
+    setScanBuffer(''); // Clear scan buffer when order changes
+  }, [selectedOrder]);
+
+  const handlePickedChange = useCallback((itemId: number, value: number) => {
     const item = selectedOrder()?.items.find(i => i.id === itemId);
     if (!item) return;
 
-    const newValue = Math.max(0, Math.min(value, item.quantity));
-    setPickedQuantities(prev => ({ ...prev, [itemId]: newValue }));
-    updateItemPicked(selectedOrder()!.id, itemId, newValue);
+    const newValue = Math.max(0, Math.min(value, Number(item.quantity)));
+    
+    // Only update if the quantity actually changes or status needs to be updated.
+    // This prevents unnecessary API calls if the user tries to increment beyond max, etc.
+    if (pickedQuantities[itemId] !== newValue) {
+      setPickedQuantities(prev => ({ ...prev, [itemId]: newValue }));
+      updateItemPicked(selectedOrder()!.id, itemId, newValue);
+
+      // Show success message only on successful increment from interaction
+      if (newValue > (pickedQuantities[itemId] || 0)) {
+        setSnackbarMessage(t('item_scanned_success', { itemTitle: item.code, currentQty: newValue, totalQty: item.quantity }));
+        setSnackbarSeverity('success');
+        setIsSnackbarOpen(true);
+      }
+    }
+  }, [selectedOrder, pickedQuantities, updateItemPicked, t]);
+
+  const processScannedEAN = useCallback((ean: string) => {
+    const order = selectedOrder();
+    if (!order) {
+      setSnackbarMessage(t('no_order_selected_scan_error'));
+      setSnackbarSeverity('warning');
+      setIsSnackbarOpen(true);
+      return;
+    }
+
+    const itemToUpdate = order.items.find(item => item.ean === ean);
+
+    if (itemToUpdate) {
+      const currentPicked = pickedQuantities[itemToUpdate.id] || 0;
+      const maxQuantity = Number(itemToUpdate.quantity);
+
+      if (currentPicked < maxQuantity) {
+        // Increment quantity by 1
+        handlePickedChange(itemToUpdate.id, currentPicked + 1);
+        // Success message handled by handlePickedChange
+      } else {
+        setSnackbarMessage(t('quantity_exceeded_error', { itemTitle: itemToUpdate.code, currentQty: currentPicked, totalQty: maxQuantity }));
+        setSnackbarSeverity('warning');
+        setIsSnackbarOpen(true);
+      }
+    } else {
+      setSnackbarMessage(t('ean_not_found_error', { ean: ean }));
+      setSnackbarSeverity('error');
+      setIsSnackbarOpen(true);
+    }
+  }, [selectedOrder, pickedQuantities, handlePickedChange, t]);
+
+  // Barcode Scanner Logic
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Ignore modifier keys and ensure an order is selected
+      if ((event.key.length > 1 && event.key !== 'Enter') || !selectedOrder()) {
+        return;
+      }
+
+      clearTimeout(timeout); // Clear any existing debounce timeout
+
+      if (event.key === 'Enter') {
+        event.preventDefault(); // Prevent newline in text fields/other default behavior
+        processScannedEAN(scanBuffer);
+        setScanBuffer(''); // Clear buffer after processing
+      } else {
+        setScanBuffer(prev => prev + event.key); // Accumulate keystrokes
+      }
+
+      // Set a timeout to clear the buffer if no new key is pressed within SCAN_DEBOUNCE_MS
+      timeout = setTimeout(() => {
+        setScanBuffer('');
+      }, SCAN_DEBOUNCE_MS);
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      clearTimeout(timeout); // Clean up timeout on unmount
+    };
+  }, [scanBuffer, selectedOrder, handlePickedChange, processScannedEAN, t]); // Add t as a dependency
+
+
+  const handleSnackbarClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setIsSnackbarOpen(false);
   };
 
   if (!selectedOrder()) {
@@ -145,6 +256,28 @@ const OrderItems = () => {
             </Card>
           </Grid>
         ))}
+        <Snackbar 
+        open={isSnackbarOpen} 
+        autoHideDuration={6000} 
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert 
+          onClose={handleSnackbarClose} 
+          severity={snackbarSeverity} 
+          sx={{ 
+            minWidth: 300, // Ensure a minimum width for larger appearance
+            fontSize: '1.2rem', // Bigger font size
+            padding: '16px 24px', // Increase padding for a larger alert box
+            display: 'flex', // Ensure flex for centering content
+            alignItems: 'center', // Center content vertically
+            justifyContent: 'center', // Center content horizontally
+            textAlign: 'center' // Ensure text aligns centrally
+          }} 
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
       </Grid>
     </Box>
   );

@@ -72,7 +72,7 @@ const OrderDetail = () => {
           startIcon={isOrderProcessing ? null : <CheckCircleIcon />}
           fullWidth
         >
-          {isOrderProcessing ? t('mark_completed_load_next') : t('order_completed')}
+          {isOrderProcessing ? t('mark_packed_load_next') : t('order_completed')}
         </Button>
 
       </Box>
