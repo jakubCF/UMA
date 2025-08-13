@@ -18,7 +18,8 @@ const formatParameterString = (key: string, value: any) => {
 
 const OrderItems = () => {
   const { t } = useTranslation();
-  const { selectedOrder, updateItemPicked } = useOrdersStore();
+  const { updateItemPicked } = useOrdersStore();
+  const selectedOrderObj = useOrdersStore(state => state.selectedOrder());
   const [pickedQuantities, setPickedQuantities] = useState<Record<number, number>>({});
 
   // State for Snackbar messages
@@ -32,23 +33,27 @@ const OrderItems = () => {
 
   // Initialize pickedQuantities when selectedOrder changes
   useEffect(() => {
-    if (selectedOrder()) {
+    if (selectedOrderObj) {
       const initialQuantities: Record<number, number> = {};
-      selectedOrder()!.items.forEach(item => {
+      selectedOrderObj!.items.forEach(item => {
         // Initialize from actual picked quantity if available, otherwise 0
         // Or if 'uma_picked' status implies a full quantity, use that.
-        // Assuming you track actual picked count somewhere, or it's implicitly 0 unless 'picked'
-        initialQuantities[item.id] = 0; // Default to 0, quantities updated via scanner
+        if (item.uma_picked === 'picked') {
+          initialQuantities[item.id] = Number(item.quantity); // Use full quantity if picked
+        }
+        else {
+          initialQuantities[item.id] = 0; // Default to 0, quantities updated via scanner
+        }
       });
       setPickedQuantities(initialQuantities);
     } else {
       setPickedQuantities({}); // Clear quantities if no order selected
     }
     setScanBuffer(''); // Clear scan buffer when order changes
-  }, [selectedOrder]);
+  }, [selectedOrderObj]);
 
   const handlePickedChange = useCallback((itemId: number, value: number) => {
-    const item = selectedOrder()?.items.find(i => i.id === itemId);
+    const item = selectedOrderObj?.items.find(i => i.id === itemId);
     if (!item) return;
 
     const newValue = Math.max(0, Math.min(value, Number(item.quantity)));
@@ -57,7 +62,7 @@ const OrderItems = () => {
     // This prevents unnecessary API calls if the user tries to increment beyond max, etc.
     if (pickedQuantities[itemId] !== newValue) {
       setPickedQuantities(prev => ({ ...prev, [itemId]: newValue }));
-      updateItemPicked(selectedOrder()!.id, itemId, newValue);
+      updateItemPicked(selectedOrderObj!.id, itemId, newValue);
 
       // Show success message only on successful increment from interaction
       if (newValue > (pickedQuantities[itemId] || 0)) {
@@ -65,11 +70,22 @@ const OrderItems = () => {
         setSnackbarSeverity('success');
         setIsSnackbarOpen(true);
       }
+      // // Check if all items are fully picked
+      // const allPicked = selectedOrderObj!.items.every(i => {
+      //   const pickedQty = (i.id === itemId) ? newValue : (pickedQuantities[i.id] || 0);
+      //   return pickedQty >= Number(i.quantity);
+      // });
+      // // If all items are picked, show a different message
+      // if (allPicked) {
+      //   setSnackbarMessage(t('all_items_picked'));
+      //   setSnackbarSeverity('success');
+      //   setIsSnackbarOpen(true);
+      // }
     }
-  }, [selectedOrder, pickedQuantities, updateItemPicked, t]);
+  }, [selectedOrderObj, pickedQuantities, updateItemPicked, t]);
 
   const processScannedEAN = useCallback((ean: string) => {
-    const order = selectedOrder();
+    const order = selectedOrderObj;
     if (!order) {
       setSnackbarMessage(t('no_order_selected_scan_error'));
       setSnackbarSeverity('warning');
@@ -97,7 +113,7 @@ const OrderItems = () => {
       setSnackbarSeverity('error');
       setIsSnackbarOpen(true);
     }
-  }, [selectedOrder, pickedQuantities, handlePickedChange, t]);
+  }, [selectedOrderObj, pickedQuantities, handlePickedChange, t]);
 
   // Barcode Scanner Logic
   useEffect(() => {
@@ -105,7 +121,7 @@ const OrderItems = () => {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       // Ignore modifier keys and ensure an order is selected
-      if ((event.key.length > 1 && event.key !== 'Enter') || !selectedOrder()) {
+      if ((event.key.length > 1 && event.key !== 'Enter') || !selectedOrderObj) {
         return;
       }
 
@@ -131,7 +147,7 @@ const OrderItems = () => {
       window.removeEventListener('keydown', handleKeyDown);
       clearTimeout(timeout); // Clean up timeout on unmount
     };
-  }, [scanBuffer, selectedOrder, handlePickedChange, processScannedEAN, t]); // Add t as a dependency
+  }, [scanBuffer, selectedOrderObj, handlePickedChange, processScannedEAN, t]); // Add t as a dependency
 
 
   const handleSnackbarClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
@@ -141,7 +157,7 @@ const OrderItems = () => {
     setIsSnackbarOpen(false);
   };
 
-  if (!selectedOrder()) {
+  if (!selectedOrderObj) {
     return <Typography>{t('select_order_items')}</Typography>;
   }
 
@@ -150,7 +166,7 @@ const OrderItems = () => {
     <Box>
       <Typography variant="h6" gutterBottom>{t('order_items')}</Typography>
       <Grid container spacing={2}>
-        {selectedOrder()!.items.map((item) => (
+        {selectedOrderObj!.items.map((item) => (
           <Grid item xs={12} key={item.id}>
             <Card>
               <Grid container>
