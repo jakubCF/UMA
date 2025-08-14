@@ -37,5 +37,9 @@
   "item_scanned_success": "{{itemTitle}} scanned! ({{currentQty}}/{{totalQty}})",
   "quantity_exceeded_error": "Cannot add more of {{itemTitle}}. Max quantity ({{totalQty}}) reached.",
   "ean_not_found_error": "EAN '{{ean}}' not found in this order.",
-  "no_order_selected_scan_error": "Please select an order before scanning."
+  "no_order_selected_scan_error": "Please select an order before scanning.",
+  "order_fulfilled_title": "Order Fulfilled!",
+  "order_fulfilled_message": "All items in this order have been successfully picked.",
+  "continue_picking": "Continue Picking",
+  "mark_order_picked": "Mark Order as Picked"
 }

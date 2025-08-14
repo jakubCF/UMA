@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 const OrderDetail = () => {
   const { t } = useTranslation();
-  const { selectedOrder, updateOrderStatus, filteredOrders, setSelectedOrderId } = useOrdersStore();
+  const { selectedOrder, updateOrderStatus, filteredOrders, setSelectedOrderId, pickedQuantities } = useOrdersStore();
 
   if (!selectedOrder()) {
     return <Typography>{t('select_order_details')}</Typography>;
@@ -16,7 +16,7 @@ const OrderDetail = () => {
   const handleCompleteAndLoadNext = () => {
     // 1. Update the order status to 'packed'
     // 2. Fetch and load the next order.
-    updateOrderStatus(order.id, 'packed')
+    handleMarkOrderPacked()
       .then(() => {
         // 2. Logic to load the next order
       const filtered = filteredOrders();
@@ -30,6 +30,40 @@ const OrderDetail = () => {
       .catch(error => {
         console.error('Failed to mark order as packed:', error);
       });
+  };
+
+  const handleMarkOrderPacked = async () => {
+
+    // Prepare items data to send to backend
+    const itemsToUpdate = order.items.map(item => {
+      const finalPickedQty = pickedQuantities[item.id] || 0;
+      const totalQuantity = Number(item.quantity);
+
+      // Determine the final status based on picked quantity
+      let finalUmaPickedStatus: 'not_picked' | 'partially_picked' | 'picked';
+      if (finalPickedQty >= totalQuantity) {
+        finalUmaPickedStatus = 'picked';
+      } else if (finalPickedQty > 0) {
+        finalUmaPickedStatus = 'partially_picked';
+      } else {
+        finalUmaPickedStatus = 'not_picked';
+      }
+
+      return {
+        id: item.id,
+        uma_picked: finalUmaPickedStatus,
+      };
+    });
+
+    try {
+      // Call the store action to update the order status and all item statuses/quantities
+      // Assuming updateOrderCompleted can now accept an array of item updates
+      await updateOrderStatus(order.id, 'packed', itemsToUpdate); // Pass itemsToUpdate
+
+    } catch (error) {
+      console.error('Failed to mark order as completed:', error);
+      // Optionally, you can show a user-friendly error message here
+    }
   };
 
   const isOrderProcessing = order.uma_status === "processing"; // Assuming 'order.status' exists

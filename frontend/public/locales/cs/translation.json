@@ -37,6 +37,10 @@
   "item_scanned_success": "{{itemTitle}} naskenováno! ({{currentQty}}/{{totalQty}})",
   "quantity_exceeded_error": "Nelze přidat více {{itemTitle}}. Dosaženo maximální množství ({{totalQty}}).",
   "ean_not_found_error": "EAN '{{ean}}' nenalezen v této objednávce.",
-  "no_order_selected_scan_error": "Před skenováním prosím vyberte objednávku."
+  "no_order_selected_scan_error": "Před skenováním prosím vyberte objednávku.",
+  "order_fulfilled_title": "Objednávka splněna!",
+  "order_fulfilled_message": "Všechny položky v této objednávce byly úspěšně vychystány.",
+  "continue_picking": "Pokračovat ve vychystávání",
+  "mark_order_picked": "Označit objednávku jako vychystanou"
 
 }

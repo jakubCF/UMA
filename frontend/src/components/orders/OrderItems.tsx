@@ -1,8 +1,9 @@
-import { Box, Typography, Grid, Card, CardContent, CardMedia, TextField, IconButton, Snackbar, Alert } from '@mui/material';
+import { Box, Typography, Grid, Card, CardContent, CardMedia, TextField, IconButton, Snackbar, Alert, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import React, { useState, useEffect, useCallback } from 'react';
 import { useOrdersStore } from '../../store/ordersStore';
+import { PickStatus} from '../../types/orders';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { green } from '@mui/material/colors';
 import { useTranslation } from 'react-i18next';
@@ -18,14 +19,17 @@ const formatParameterString = (key: string, value: any) => {
 
 const OrderItems = () => {
   const { t } = useTranslation();
-  const { updateItemPicked } = useOrdersStore();
+  const { selectedOrderId, updateOrderStatus, pickedQuantities, setPickedQuantity } = useOrdersStore();
   const selectedOrderObj = useOrdersStore(state => state.selectedOrder());
-  const [pickedQuantities, setPickedQuantities] = useState<Record<number, number>>({});
+  const [ItemStatus, setItemStatus] = useState<Record<number, PickStatus>>({});
 
   // State for Snackbar messages
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'info' | 'error' | 'warning'>('info');
+
+  // State for the Order Fulfilled Dialog
+  const [isOrderFulfilledDialogOpen, setIsOrderFulfilledDialogOpen] = useState(false);
 
   // State for barcode scanner input buffer
   const [scanBuffer, setScanBuffer] = useState<string>('');
@@ -33,24 +37,28 @@ const OrderItems = () => {
 
   // Initialize pickedQuantities when selectedOrder changes
   useEffect(() => {
-    if (selectedOrderObj) {
-      const initialQuantities: Record<number, number> = {};
-      selectedOrderObj!.items.forEach(item => {
-        // Initialize from actual picked quantity if available, otherwise 0
-        // Or if 'uma_picked' status implies a full quantity, use that.
-        if (item.uma_picked === 'picked') {
-          initialQuantities[item.id] = Number(item.quantity); // Use full quantity if picked
-        }
-        else {
-          initialQuantities[item.id] = 0; // Default to 0, quantities updated via scanner
-        }
-      });
-      setPickedQuantities(initialQuantities);
-    } else {
-      setPickedQuantities({}); // Clear quantities if no order selected
-    }
+    // if (selectedOrderObj) {
+    //   console.log('Selected Order:', selectedOrderObj);
+    //   const initialQuantities: Record<number, number> = {};
+    //   selectedOrderObj!.items.forEach(item => {
+    //     // Initialize from actual picked quantity if available, otherwise 0
+    //     // Or if 'uma_picked' status implies a full quantity, use that.
+    //     // Assuming you track actual picked count somewhere, or it's implicitly 0 unless 'picked'
+    //     if (item.uma_picked === 'picked') {
+    //       console.log(`Item ${item.id} is picked, setting initial quantity to full: ${item.quantity}`);
+    //       initialQuantities[item.id] = Number(item.quantity); // Full quantity if picked
+    //     } 
+    //     // else {
+    //     //   initialQuantities[item.id] = 0; // Default to 0 if not picked
+    //     // }
+    //   });
+    //    setPickedQuantities(initialQuantities);
+    //  } 
+    // else {
+    //   setPickedQuantities({}); // Clear quantities if no order selected
+    // }
     setScanBuffer(''); // Clear scan buffer when order changes
-  }, [selectedOrderObj]);
+  }, [selectedOrderObj, selectedOrderId]);
 
   const handlePickedChange = useCallback((itemId: number, value: number) => {
     const item = selectedOrderObj?.items.find(i => i.id === itemId);
@@ -61,8 +69,9 @@ const OrderItems = () => {
     // Only update if the quantity actually changes or status needs to be updated.
     // This prevents unnecessary API calls if the user tries to increment beyond max, etc.
     if (pickedQuantities[itemId] !== newValue) {
-      setPickedQuantities(prev => ({ ...prev, [itemId]: newValue }));
-      updateItemPicked(selectedOrderObj!.id, itemId, newValue);
+      setPickedQuantity(itemId, newValue); // Update local state
+      
+      //updateItemPicked(selectedOrderObj!.id, itemId, newValue);
 
       // Show success message only on successful increment from interaction
       if (newValue > (pickedQuantities[itemId] || 0)) {
@@ -70,19 +79,32 @@ const OrderItems = () => {
         setSnackbarSeverity('success');
         setIsSnackbarOpen(true);
       }
-      // // Check if all items are fully picked
-      // const allPicked = selectedOrderObj!.items.every(i => {
-      //   const pickedQty = (i.id === itemId) ? newValue : (pickedQuantities[i.id] || 0);
-      //   return pickedQty >= Number(i.quantity);
-      // });
-      // // If all items are picked, show a different message
-      // if (allPicked) {
-      //   setSnackbarMessage(t('all_items_picked'));
-      //   setSnackbarSeverity('success');
-      //   setIsSnackbarOpen(true);
-      // }
+      if (Number(item.quantity) === newValue) {
+        console.log(`Item ${itemId} fully picked, updating status to 'picked'`);
+        setItemStatus(prev => ({ ...prev, [itemId]: 'picked' }));
+      }
+      else if (newValue === 0) {
+        console.log(`Item ${itemId} not picked, updating status to 'not_picked'`);
+        setItemStatus(prev => ({ ...prev, [itemId]: 'not_picked' }));
+      }
+      else if (newValue < Number(item.quantity) && newValue > 0) {
+        console.log(`Item ${itemId} partially picked, updating status to 'partially_picked'`);
+        setItemStatus(prev => ({ ...prev, [itemId]: 'partially_picked' }));
+      }
+      // Check if all items are fully picked (after this change)
+      const tempPickedQuantities = { ...pickedQuantities, [itemId]: newValue };
+      
+      const allPicked = selectedOrderObj!.items.every(i => { // Use selectedOrderObj!.items
+        const pickedQty = (i.id === itemId) ? newValue : (tempPickedQuantities[i.id] || 0); // Use tempPickedQuantities
+        return pickedQty >= Number(i.quantity);
+      });
+
+      // If all items are picked, open the fulfillment dialog
+      if (allPicked) {
+        setIsOrderFulfilledDialogOpen(true);
+      }
     }
-  }, [selectedOrderObj, pickedQuantities, updateItemPicked, t]);
+  }, [selectedOrderObj, pickedQuantities, setPickedQuantity, t]);
 
   const processScannedEAN = useCallback((ean: string) => {
     const order = selectedOrderObj;
@@ -157,6 +179,51 @@ const OrderItems = () => {
     setIsSnackbarOpen(false);
   };
 
+  const handleMarkOrderPacked = async () => {
+    if (!selectedOrderObj) return;
+
+    // Prepare items data to send to backend
+    const itemsToUpdate = selectedOrderObj.items.map(item => {
+      const finalPickedQty = pickedQuantities[item.id] || 0;
+      const totalQuantity = Number(item.quantity);
+
+      // Determine the final status based on picked quantity
+      let finalUmaPickedStatus: 'not_picked' | 'partially_picked' | 'picked';
+      if (finalPickedQty >= totalQuantity) {
+        finalUmaPickedStatus = 'picked';
+      } else if (finalPickedQty > 0) {
+        finalUmaPickedStatus = 'partially_picked';
+      } else {
+        finalUmaPickedStatus = 'not_picked';
+      }
+
+      return {
+        id: item.id,
+        uma_picked: finalUmaPickedStatus,
+      };
+    });
+
+    try {
+      // Call the store action to update the order status and all item statuses/quantities
+      // Assuming updateOrderCompleted can now accept an array of item updates
+      await updateOrderStatus(selectedOrderObj.id, 'completed', itemsToUpdate); // Pass itemsToUpdate
+      setIsOrderFulfilledDialogOpen(false); // Close the dialog
+      // You might want to show a success Snackbar after marking order as picked if desired
+      setSnackbarMessage(t('order_marked_as_picked_success'));
+      setSnackbarSeverity('success');
+      setIsSnackbarOpen(true);
+    } catch (error) {
+      console.error('Failed to mark order as picked:', error);
+      setSnackbarMessage(t('order_marked_as_picked_error'));
+      setSnackbarSeverity('error');
+      setIsSnackbarOpen(true);
+    }
+  };
+
+  const handleCloseOrderFulfilledDialog = () => {
+    setIsOrderFulfilledDialogOpen(false);
+  };
+
   if (!selectedOrderObj) {
     return <Typography>{t('select_order_items')}</Typography>;
   }
@@ -218,7 +285,7 @@ const OrderItems = () => {
                         >
                           {/* Top-right quantity display with conditional checkmark */}
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                            {item.uma_picked === 'picked' && (
+                            {ItemStatus[item.id] === 'picked' && (
                               <CheckCircleIcon sx={{ color: green[500], fontSize: 24 }} />
                             )}
                             <Typography variant="body1" fontSize={"14pt"}>
@@ -245,7 +312,7 @@ const OrderItems = () => {
                                 <RemoveIcon />
                               </IconButton>
                               <TextField
-                                id='picked-quantity'
+                                id={`picked-quantity-${item.id}`}
                                 size="small"
                                 type="number"
                                 value={pickedQuantities[item.id] || 0}
@@ -261,7 +328,7 @@ const OrderItems = () => {
                             </Box>
                             
                             {/* Status Typography - This is now in the correct place */}
-                            <Typography variant="body2">{t('status')} {t(`status_${item.uma_picked}`)}</Typography>
+                            <Typography variant="body2">{t('status')} {t(`status_${ItemStatus[item.id] || 'not_picked'}`)}</Typography>
                           </Box>
                         </Box>
                       </Grid>
@@ -295,6 +362,21 @@ const OrderItems = () => {
         </Alert>
       </Snackbar>
       </Grid>
+      {/* Order Fulfilled Dialog */}
+      <Dialog open={isOrderFulfilledDialogOpen} onClose={handleCloseOrderFulfilledDialog}>
+        <DialogTitle>{t('order_fulfilled_title')}</DialogTitle>
+        <DialogContent>
+          <Typography>{t('order_fulfilled_message')}</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseOrderFulfilledDialog} color="primary" variant="contained">
+            {t('continue_picking')}
+          </Button>
+          <Button onClick={handleMarkOrderPacked} color="success" variant="contained">
+            {t('mark_order_picked')}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 };

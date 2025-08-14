@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Order, OrderStatus } from '../types/orders';
+import { Order, OrderStatus, PickStatus} from '../types/orders';
 import { ordersApi } from '../services/api';
 
 // Define polling constants
@@ -18,8 +18,10 @@ interface OrdersState {
   setFilterStatus: (status: string) => void;
   selectedOrder: () => Order | undefined;
   filteredOrders: () => Order[];
+  pickedQuantities: Record<number, number>;
+  setPickedQuantity: (itemId: number, quantity: number) => void; 
   updateItemPicked: (orderId: number, itemId: number, pickedQty: number) => Promise<void>;
-  updateOrderStatus: (orderId: number, status?: OrderStatus) => Promise<void>;
+  updateOrderStatus: (orderId: number, status?: OrderStatus, itemsToUpdate?: Array<{id: number, uma_picked: PickStatus}>) => Promise<void>;
   fetchOrdersfromAPI: () => Promise<void>;
   syncPackedOrders: () => Promise<void>;
 }
@@ -61,6 +63,15 @@ export const useOrdersStore = create<OrdersState>((set, get) => ({
     const { selectedOrderId, orders } = get();
     return orders.find(o => o.id === selectedOrderId);
   },
+  pickedQuantities: {},
+  setPickedQuantity: (itemId, quantity) => {
+    set(state => ({
+      pickedQuantities: {
+        ...state.pickedQuantities,
+        [itemId]: quantity,
+      },
+    }));
+  },
   updateItemPicked: async (orderId: number, itemId: number, pickedQty: number) => {
     const order = get().orders.find(o => o.id === orderId);
     if (!order) return;
@@ -100,9 +111,9 @@ export const useOrdersStore = create<OrdersState>((set, get) => ({
       set({ error: 'Failed to update item status' });
     }
   },
-  updateOrderStatus: async (orderId: number, status: OrderStatus = 'packed') => {
+  updateOrderStatus: async (orderId: number, status: OrderStatus = 'packed', itemsToUpdate) => {
     try {
-      await ordersApi.updateOrderStatus(orderId, {uma_status: status});
+      await ordersApi.updateOrderStatus(orderId, {uma_status: status, items: itemsToUpdate || ["aaaa"]});
       // Optionally, you can refetch orders or update state to reflect the change
       const updatedOrders = get().orders.map(o => {
         if (o.id === orderId) {

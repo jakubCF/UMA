@@ -48,7 +48,7 @@ api.interceptors.response.use(
 
 export const ordersApi = {
   getOrders: () => api.get('/orders/'),
-  updateOrderStatus: (orderId: number,  data: { uma_status: string}) => 
+  updateOrderStatus: (orderId: number,  data: { uma_status: string, items: {}[]}) => 
     api.patch(`/orders/${orderId}/`, data),
   updateOrderItemStatus: (orderId: number, itemId: number, data: { uma_picked: string }) => 
     api.patch(`/orders/${orderId}/items/${itemId}/status/`, data),
