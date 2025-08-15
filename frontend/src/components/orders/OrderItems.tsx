@@ -228,12 +228,33 @@ const OrderItems = () => {
     return <Typography>{t('select_order_items')}</Typography>;
   }
 
+  const sortedItems = [...selectedOrderObj.items].sort((a, b) => {
+    // Regex to extract digits from the string (e.g., "P00170-5" -> "00170", "5")
+    const extractNumbers = (code: string) => {
+      // Find all sequences of digits
+      const matches = code.match(/\d+/g); 
+      // Join them and convert to a number for comparison. 
+      // If no numbers, treat as 0 or handle as string later.
+      return matches ? parseInt(matches.join('').padEnd(10,"0"), 10) : 0; 
+    };
+
+    const numA = extractNumbers(a.code);
+    const numB = extractNumbers(b.code);
+
+    if (numA !== numB) {
+      return numA - numB; // Sort by the extracted number
+    } else {
+      // If numeric parts are identical, sort by the full string code
+      return a.code.localeCompare(b.code);
+    }
+  });
+
   return (
     // set box to max-height to display and enable scrolling
     <Box>
       <Typography variant="h6" gutterBottom>{t('order_items')}</Typography>
       <Grid container spacing={2}>
-        {selectedOrderObj!.items.map((item) => (
+        {sortedItems.map((item) => (
           <Grid item xs={12} key={item.id}>
             <Card>
               <Grid container>
@@ -328,7 +349,7 @@ const OrderItems = () => {
                             </Box>
                             
                             {/* Status Typography - This is now in the correct place */}
-                            <Typography variant="body2">{t('status')} {t(`status_${ItemStatus[item.id] || 'not_picked'}`)}</Typography>
+                            <Typography variant="body2">{t('status')}: {t(`status_${ItemStatus[item.id] || 'not_picked'}`)}</Typography>
                           </Box>
                         </Box>
                       </Grid>

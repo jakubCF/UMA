@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { List, ListItem, ListItemButton, ListItemText, Typography, CircularProgress, Alert, Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { useOrdersStore } from '../../store/ordersStore';
 import { useTranslation } from 'react-i18next';
@@ -47,7 +47,15 @@ const OrdersList = () => {
             >
               <ListItemText 
                 primary={t('order') + ` ${order.order_number}`}
-                secondary={t('delivery') + ` ${order.shipment?.name || 'No delivery method'}`}
+                secondary={<React.Fragment>
+                  <Typography component="span" variant="body2" color="text.secondary">
+                    {t('delivery')} {order.shipment?.name || t('no_delivery_method')}
+                  </Typography>
+                  <br /> {/* This forces a new line */}
+                  <Typography component="span" variant="body2" color="text.secondary">
+                    {t('status')}: {order.status} {/* Assuming order.uma_status is the correct field for status */}
+                  </Typography>
+                </React.Fragment>}
               />
             </ListItemButton>
           </ListItem>

@@ -16,7 +16,7 @@
   "code": "Kód:",
   "parameters": "Parametry:",
   "ean": "EAN:",
-  "status": "Stav:",
+  "status": "Stav",
   "picked": "Vybráno:",
   "check_new_orders": "Zkontrolovat nové objednávky",
   "sync_packed_orders": "Synchronizovat zabalené objednávky",
@@ -27,6 +27,7 @@
   "packed": "Zabalené",
   "completed": "Dokončené",
   "cancelled": "Zrušené",
+  "error": "Chyba",
   "all": "Všechny",
   "orders_menu": "Objednávky",
   "products_menu": "Sklad",
@@ -39,8 +40,9 @@
   "ean_not_found_error": "EAN '{{ean}}' nenalezen v této objednávce.",
   "no_order_selected_scan_error": "Před skenováním prosím vyberte objednávku.",
   "order_fulfilled_title": "Objednávka splněna!",
-  "order_fulfilled_message": "Všechny položky v této objednávce byly úspěšně vychystány.",
-  "continue_picking": "Pokračovat ve vychystávání",
-  "mark_order_picked": "Označit objednávku jako vychystanou"
+  "order_fulfilled_message": "Všechny položky v této objednávce byly úspěšně vybrány.",
+  "continue_picking": "Pokračovat kompletaci",
+  "mark_order_picked": "Označit objednávku jako vychystanou",
+  "change_status": "Změnit stav"
 
 }

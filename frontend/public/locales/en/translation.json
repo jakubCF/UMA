@@ -16,7 +16,7 @@
   "code": "Code:",
   "parameters": "Parameters:",
   "ean": "EAN:",
-  "status": "Status:",
+  "status": "Status",
   "picked": "Picked:",
   "check_new_orders": "Check for new orders",
   "sync_packed_orders": "Sync packed orders",
@@ -27,6 +27,7 @@
   "packed": "Packed",
   "completed": "Completed",
   "cancelled": "Cancelled",
+  "error": "Error",
   "all": "All",
   "orders_menu": "Orders",
   "products_menu": "Products",
@@ -39,7 +40,8 @@
   "ean_not_found_error": "EAN '{{ean}}' not found in this order.",
   "no_order_selected_scan_error": "Please select an order before scanning.",
   "order_fulfilled_title": "Order Fulfilled!",
-  "order_fulfilled_message": "All items in this order have been successfully picked.",
-  "continue_picking": "Continue Picking",
-  "mark_order_picked": "Mark Order as Picked"
+  "order_fulfilled_message": "All items in this order have been successfully packed.",
+  "continue_picking": "Continue Packing",
+  "mark_order_picked": "Mark Order as Picked",
+  "change_status": "Change Status"
 }

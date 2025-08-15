@@ -1,17 +1,29 @@
-import { Box, Typography, Divider, Button } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { FormControl, InputLabel, Select, MenuItem, Box, Typography, Divider, Button } from '@mui/material';
 import { useOrdersStore } from '../../store/ordersStore';
+import { OrderStatus} from '../../types/orders';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useTranslation } from 'react-i18next';
 
 const OrderDetail = () => {
   const { t } = useTranslation();
   const { selectedOrder, updateOrderStatus, filteredOrders, setSelectedOrderId, pickedQuantities } = useOrdersStore();
+  const [ newStatus, setnewStatus ] = useState<OrderStatus>(selectedOrder()?.uma_status || 'processing');
+  const ALL_ORDER_STATUSES = ['processing', 'packed', 'completed', 'cancelled', 'error'];
 
-  if (!selectedOrder()) {
+  const order = selectedOrder();
+
+  useEffect(() => {
+    if (order) {
+      setnewStatus(order.uma_status);
+    } else {
+      setnewStatus('processing');
+    }
+  }, [order]);
+
+  if (!order) {
     return <Typography>{t('select_order_details')}</Typography>;
   }
-
-  const order = selectedOrder()!;
 
   const handleCompleteAndLoadNext = () => {
     // 1. Update the order status to 'packed'
@@ -68,12 +80,14 @@ const OrderDetail = () => {
 
   const isOrderProcessing = order.uma_status === "processing"; // Assuming 'order.status' exists
 
-
   return (
     <Box>
       <Typography variant="h6" gutterBottom>Order {order.order_number}</Typography>
       <Divider sx={{ my: 2 }} />
       
+      <Typography variant="body1" gutterBottom>
+        <strong>{t('status')}:</strong> {order.status || 'N/A'}
+      </Typography>
       <Typography variant="body1" gutterBottom>
         <strong>{t('delivery_method')}</strong> {order.shipment?.name || 'No delivery method'}
       </Typography>
@@ -107,8 +121,29 @@ const OrderDetail = () => {
           fullWidth
         >
           {isOrderProcessing ? t('mark_packed_load_next') : t('order_completed')}
-        </Button>
-
+      </Button>
+      <FormControl size="small" sx={{ minWidth: 120, mt: 2, mr: 1 }}>
+        <InputLabel>Status</InputLabel>
+        <Select
+          value={newStatus}
+          label="Status"
+          onChange={(e) => setnewStatus(e.target.value as OrderStatus)}
+        >
+          {ALL_ORDER_STATUSES!.map((status) => (
+            <MenuItem key={status} value={status}>
+              {t(status)}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <Button
+          variant="outlined"
+          color="primary"
+          onClick={() => updateOrderStatus(order.id, newStatus)}
+          sx={{ mt: 2 }}
+        >
+          {t('change_status')}
+      </Button>
       </Box>
     </Box>
   );

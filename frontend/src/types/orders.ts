@@ -8,7 +8,7 @@ export interface OrderItem {
   type: string | null;
   uuid: string | null;
   parent_uuid: string | null;
-  code: string | null;
+  code: string | "";
   code_supplier: string | null;
   supplier: string | null;
   ean: string | null;

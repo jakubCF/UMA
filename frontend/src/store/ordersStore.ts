@@ -113,7 +113,7 @@ export const useOrdersStore = create<OrdersState>((set, get) => ({
   },
   updateOrderStatus: async (orderId: number, status: OrderStatus = 'packed', itemsToUpdate) => {
     try {
-      await ordersApi.updateOrderStatus(orderId, {uma_status: status, items: itemsToUpdate || ["aaaa"]});
+      await ordersApi.updateOrderStatus(orderId, {uma_status: status, items: itemsToUpdate || []});
       // Optionally, you can refetch orders or update state to reflect the change
       const updatedOrders = get().orders.map(o => {
         if (o.id === orderId) {
@@ -131,7 +131,22 @@ export const useOrdersStore = create<OrdersState>((set, get) => ({
     set({ isLoading: true, error: null });
     try {
       await ordersApi.syncOrdersTask();
-      await get().fetchOrders();
+      // 3. Start Polling for status updates
+      let attempts = 0;
+      const pollInterval = setInterval(async () => {
+        attempts++;
+        console.log(`Polling for order status updates... Attempt ${attempts}`);
+
+        try {
+          await get().fetchOrders(); // Re-fetch all orders to check their statuses
+        }
+        catch (pollError) {
+          console.error('Error during polling:', pollError);
+        }
+        if (attempts >= MAX_POLLING_ATTEMPTS) {
+            clearInterval(pollInterval);
+        }
+      }, POLLING_INTERVAL);
       set({ isLoading: false});
     }
     catch (error) {
