@@ -37,28 +37,30 @@ const OrderItems = () => {
 
   // Initialize pickedQuantities when selectedOrder changes
   useEffect(() => {
-    // if (selectedOrderObj) {
-    //   console.log('Selected Order:', selectedOrderObj);
-    //   const initialQuantities: Record<number, number> = {};
-    //   selectedOrderObj!.items.forEach(item => {
-    //     // Initialize from actual picked quantity if available, otherwise 0
-    //     // Or if 'uma_picked' status implies a full quantity, use that.
-    //     // Assuming you track actual picked count somewhere, or it's implicitly 0 unless 'picked'
-    //     if (item.uma_picked === 'picked') {
-    //       console.log(`Item ${item.id} is picked, setting initial quantity to full: ${item.quantity}`);
-    //       initialQuantities[item.id] = Number(item.quantity); // Full quantity if picked
-    //     } 
-    //     // else {
-    //     //   initialQuantities[item.id] = 0; // Default to 0 if not picked
-    //     // }
-    //   });
-    //    setPickedQuantities(initialQuantities);
-    //  } 
+    if (selectedOrderObj) {
+      selectedOrderObj!.items.forEach(item => {
+        // Initialize from actual picked quantity if available, otherwise 0
+        // Or if 'uma_picked' status implies a full quantity, use that.
+        // Assuming you track actual picked count somewhere, or it's implicitly 0 unless 'picked'
+        if (item.uma_picked === 'picked') {
+          setPickedQuantity(item.id, Number(item.quantity));
+          setItemStatus(prev => ({ ...prev, [item.id]: 'picked' }));
+        } 
+        else if (item.uma_picked === 'partially_picked') {
+          setItemStatus(prev => ({ ...prev, [item.id]: 'partially_picked' }));
+        }
+        else {
+          setPickedQuantity(item.id, 0);
+          setItemStatus(prev => ({ ...prev, [item.id]: 'not_picked' }));
+        }
+      });
+       
+     } 
     // else {
-    //   setPickedQuantities({}); // Clear quantities if no order selected
+    //   setPickedQuantity({}); // Clear quantities if no order selected
     // }
     setScanBuffer(''); // Clear scan buffer when order changes
-  }, [selectedOrderObj, selectedOrderId]);
+  }, [selectedOrderObj, selectedOrderId, setPickedQuantity]);
 
   const handlePickedChange = useCallback((itemId: number, value: number) => {
     const item = selectedOrderObj?.items.find(i => i.id === itemId);
