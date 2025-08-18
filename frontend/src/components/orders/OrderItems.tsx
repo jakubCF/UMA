@@ -19,7 +19,7 @@ const formatParameterString = (key: string, value: any) => {
 
 const OrderItems = () => {
   const { t } = useTranslation();
-  const { selectedOrderId, updateOrderStatus, pickedQuantities, setPickedQuantity } = useOrdersStore();
+  const { selectedOrderId, updateOrderStatus, pickedQuantities, setPickedQuantity, filteredOrders, setSelectedOrderId } = useOrdersStore();
   const selectedOrderObj = useOrdersStore(state => state.selectedOrder());
   const [ItemStatus, setItemStatus] = useState<Record<number, PickStatus>>({});
 
@@ -208,12 +208,19 @@ const OrderItems = () => {
     try {
       // Call the store action to update the order status and all item statuses/quantities
       // Assuming updateOrderCompleted can now accept an array of item updates
-      await updateOrderStatus(selectedOrderObj.id, 'completed', itemsToUpdate); // Pass itemsToUpdate
+      await updateOrderStatus(selectedOrderObj.id, 'packed', itemsToUpdate); // Pass itemsToUpdate
       setIsOrderFulfilledDialogOpen(false); // Close the dialog
       // You might want to show a success Snackbar after marking order as picked if desired
       setSnackbarMessage(t('order_marked_as_picked_success'));
       setSnackbarSeverity('success');
       setIsSnackbarOpen(true);
+      const filtered = filteredOrders();
+      if (filtered.length !== 0){
+        setSelectedOrderId(filtered[0].id);
+      }
+      else {
+        setSelectedOrderId(null);
+      }
     } catch (error) {
       console.error('Failed to mark order as picked:', error);
       setSnackbarMessage(t('order_marked_as_picked_error'));

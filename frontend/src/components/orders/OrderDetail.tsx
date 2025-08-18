@@ -78,6 +78,17 @@ const OrderDetail = () => {
     }
   };
 
+  const handleChangeStatus = async () => {
+    try {
+      await updateOrderStatus(order.id, newStatus);
+      // Optionally, you can show a success Snackbar after changing status
+      setSelectedOrderId(null); // Refresh the selected order to reflect changes
+    } catch (error) {
+      console.error('Failed to change order status:', error);
+      // Optionally, you can show a user-friendly error message here
+    }
+  };
+
   const isOrderProcessing = order.uma_status === "processing"; // Assuming 'order.status' exists
 
   return (
@@ -139,7 +150,7 @@ const OrderDetail = () => {
       <Button
           variant="outlined"
           color="primary"
-          onClick={() => updateOrderStatus(order.id, newStatus)}
+          onClick={() => handleChangeStatus()}
           sx={{ mt: 2 }}
         >
           {t('change_status')}
