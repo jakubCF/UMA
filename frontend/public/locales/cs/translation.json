@@ -41,8 +41,12 @@
   "no_order_selected_scan_error": "Před skenováním prosím vyberte objednávku.",
   "order_fulfilled_title": "Objednávka splněna!",
   "order_fulfilled_message": "Všechny položky v této objednávce byly úspěšně vybrány.",
-  "continue_picking": "Pokračovat kompletaci",
-  "mark_order_picked": "Označit objednávku jako vychystanou",
-  "change_status": "Změnit stav"
+  "continue_picking": "Pokračovat v kompletaci",
+  "mark_order_picked": "Označit objednávku jako přichystanou",
+  "change_status": "Změnit stav",
+  "syncing_packed_orders": "Synchronizuji zabalené objednávky...",
+  "fetching_orders": "Načítám objednávky...",
+  "order_marked_as_packed_success": "Objednávka byla úspěšně označena jako přichystaná.",
+  "order_marked_as_packed_error": "Chyba při označování objednávky jako přichystá. Zkuste to prosím znovu."
 
 }

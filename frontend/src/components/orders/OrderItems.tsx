@@ -1,4 +1,4 @@
-import { Box, Typography, Grid, Card, CardContent, CardMedia, TextField, IconButton, Snackbar, Alert, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Box, Typography, Grid, Card, CardContent, CardMedia, TextField, IconButton, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import React, { useState, useEffect, useCallback } from 'react';
@@ -17,16 +17,16 @@ const formatParameterString = (key: string, value: any) => {
   return `${key}: ${value}`;
 };
 
-const OrderItems = () => {
+// Interface for the showSnackbar prop that this component expects
+interface OrderItemsProps {
+  showSnackbar: (message: string, severity: 'success' | 'info' | 'error' | 'warning') => void;
+}
+
+const OrderItems: React.FC<OrderItemsProps> = ({ showSnackbar }) => {
   const { t } = useTranslation();
   const { selectedOrderId, updateOrderStatus, pickedQuantities, setPickedQuantity, filteredOrders, setSelectedOrderId } = useOrdersStore();
   const selectedOrderObj = useOrdersStore(state => state.selectedOrder());
   const [ItemStatus, setItemStatus] = useState<Record<number, PickStatus>>({});
-
-  // State for Snackbar messages
-  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
-  const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'info' | 'error' | 'warning'>('info');
 
   // State for the Order Fulfilled Dialog
   const [isOrderFulfilledDialogOpen, setIsOrderFulfilledDialogOpen] = useState(false);
@@ -77,9 +77,7 @@ const OrderItems = () => {
 
       // Show success message only on successful increment from interaction
       if (newValue > (pickedQuantities[itemId] || 0)) {
-        setSnackbarMessage(t('item_scanned_success', { itemTitle: item.code, currentQty: newValue, totalQty: item.quantity }));
-        setSnackbarSeverity('success');
-        setIsSnackbarOpen(true);
+        showSnackbar(t('item_scanned_success', { itemTitle: item.code, currentQty: newValue, totalQty: item.quantity }), 'success');
       }
       if (Number(item.quantity) === newValue) {
         console.log(`Item ${itemId} fully picked, updating status to 'picked'`);
@@ -106,14 +104,12 @@ const OrderItems = () => {
         setIsOrderFulfilledDialogOpen(true);
       }
     }
-  }, [selectedOrderObj, pickedQuantities, setPickedQuantity, t]);
+  }, [selectedOrderObj, pickedQuantities, setPickedQuantity, showSnackbar, t]);
 
   const processScannedEAN = useCallback((ean: string) => {
     const order = selectedOrderObj;
     if (!order) {
-      setSnackbarMessage(t('no_order_selected_scan_error'));
-      setSnackbarSeverity('warning');
-      setIsSnackbarOpen(true);
+      showSnackbar(t('no_order_selected_scan_error'), 'warning');
       return;
     }
 
@@ -128,16 +124,12 @@ const OrderItems = () => {
         handlePickedChange(itemToUpdate.id, currentPicked + 1);
         // Success message handled by handlePickedChange
       } else {
-        setSnackbarMessage(t('quantity_exceeded_error', { itemTitle: itemToUpdate.code, currentQty: currentPicked, totalQty: maxQuantity }));
-        setSnackbarSeverity('warning');
-        setIsSnackbarOpen(true);
+        showSnackbar(t('quantity_exceeded_error', { itemTitle: itemToUpdate.code, currentQty: currentPicked, totalQty: maxQuantity }), 'warning');
       }
     } else {
-      setSnackbarMessage(t('ean_not_found_error', { ean: ean }));
-      setSnackbarSeverity('error');
-      setIsSnackbarOpen(true);
+      showSnackbar(t('ean_not_found_error', { ean: ean }), 'error');
     }
-  }, [selectedOrderObj, pickedQuantities, handlePickedChange, t]);
+  }, [selectedOrderObj, pickedQuantities, handlePickedChange, showSnackbar, t]);
 
   // Barcode Scanner Logic
   useEffect(() => {
@@ -173,14 +165,6 @@ const OrderItems = () => {
     };
   }, [scanBuffer, selectedOrderObj, handlePickedChange, processScannedEAN, t]); // Add t as a dependency
 
-
-  const handleSnackbarClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setIsSnackbarOpen(false);
-  };
-
   const handleMarkOrderPacked = async () => {
     if (!selectedOrderObj) return;
 
@@ -211,9 +195,7 @@ const OrderItems = () => {
       await updateOrderStatus(selectedOrderObj.id, 'packed', itemsToUpdate); // Pass itemsToUpdate
       setIsOrderFulfilledDialogOpen(false); // Close the dialog
       // You might want to show a success Snackbar after marking order as picked if desired
-      setSnackbarMessage(t('order_marked_as_picked_success'));
-      setSnackbarSeverity('success');
-      setIsSnackbarOpen(true);
+      showSnackbar(t('order_marked_as_packed_success'), 'success');
       const filtered = filteredOrders();
       if (filtered.length !== 0){
         setSelectedOrderId(filtered[0].id);
@@ -222,10 +204,8 @@ const OrderItems = () => {
         setSelectedOrderId(null);
       }
     } catch (error) {
-      console.error('Failed to mark order as picked:', error);
-      setSnackbarMessage(t('order_marked_as_picked_error'));
-      setSnackbarSeverity('error');
-      setIsSnackbarOpen(true);
+      console.error('Failed to mark order as packed:', error);
+      showSnackbar(t('order_marked_as_packed_error'), 'error');
     }
   };
 
@@ -369,28 +349,6 @@ const OrderItems = () => {
             </Card>
           </Grid>
         ))}
-        <Snackbar 
-        open={isSnackbarOpen} 
-        autoHideDuration={6000} 
-        onClose={handleSnackbarClose}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-      >
-        <Alert 
-          onClose={handleSnackbarClose} 
-          severity={snackbarSeverity} 
-          sx={{ 
-            minWidth: 300, // Ensure a minimum width for larger appearance
-            fontSize: '1.2rem', // Bigger font size
-            padding: '16px 24px', // Increase padding for a larger alert box
-            display: 'flex', // Ensure flex for centering content
-            alignItems: 'center', // Center content vertically
-            justifyContent: 'center', // Center content horizontally
-            textAlign: 'center' // Ensure text aligns centrally
-          }} 
-        >
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
       </Grid>
       {/* Order Fulfilled Dialog */}
       <Dialog open={isOrderFulfilledDialogOpen} onClose={handleCloseOrderFulfilledDialog}>

@@ -1,5 +1,5 @@
-import { Grid, Paper, IconButton, Box } from '@mui/material';
-import { useState, useEffect } from 'react';
+import { Grid, Paper, IconButton, Box, Snackbar, Alert } from '@mui/material';
+import { useState, useEffect, useCallback } from 'react';
 import { styled } from '@mui/material/styles';
 import ListIcon from '@mui/icons-material/List';
 import Button from '@mui/material/Button';
@@ -24,24 +24,50 @@ const ToggleButton = styled(Box)(({ theme }) => ({
   }
 }));
 
-const fetchOrdersfromAPI = () => {
-  const { fetchOrdersfromAPI } = useOrdersStore.getState();
-  fetchOrdersfromAPI();
-};
-const syncPackedOrders = () => {
-  const { syncPackedOrders } = useOrdersStore.getState();
-  syncPackedOrders();
-};
-
 export const OrdersPage = () => {
   const { t } = useTranslation();
-  const { selectedOrderId } = useOrdersStore();
+  const { selectedOrderId, fetchOrdersfromAPI, syncPackedOrders } = useOrdersStore();
   const [isListOpen, setIsListOpen] = useState(true);
+
+  // --- SIMPLIFIED GLOBAL SNACKBAR STATE AND LOGIC ---
+  const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'info' | 'error' | 'warning'>('info');
+
+  // Function to show a single snackbar message
+  const showSnackbar = useCallback((message: string, severity: 'success' | 'info' | 'error' | 'warning') => {
+    setSnackbarMessage(message);
+    setSnackbarSeverity(severity);
+    setIsSnackbarOpen(true);
+    // Material UI's Snackbar autoHideDuration will automatically call onClose after 6 seconds
+  }, []);
+
+  // Handle closing of the single Snackbar
+  const handleSnackbarClose = useCallback((event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setIsSnackbarOpen(false);
+  }, []);
+  // --- END SIMPLIFIED GLOBAL SNACKBAR LOGIC ---
+
+  const handlesyncPackedOrders = useCallback(() => {
+    syncPackedOrders();
+    showSnackbar(t('syncing_packed_orders'), 'info');
+  }, [syncPackedOrders, showSnackbar, t]);
+
+  const handlefetchOrdersfromAPI = useCallback(() => {
+    fetchOrdersfromAPI();
+    showSnackbar(t('fetching_orders'), 'info');
+  }, [fetchOrdersfromAPI, showSnackbar, t]);
 
   // Auto-hide when order is selected
   useEffect(() => {
     if (selectedOrderId) {
       setIsListOpen(false);
+    }
+    else {
+      setIsListOpen(true);
     }
   }, [selectedOrderId]);
 
@@ -52,13 +78,13 @@ export const OrdersPage = () => {
           <Paper sx={{ p: 2 }}>
             <Button sx={{ mr: 1 }} 
               color="warning"
-              onClick={fetchOrdersfromAPI}
+              onClick={handlefetchOrdersfromAPI}
               variant="contained">
               {t('check_new_orders')}
             </Button>
             <Button
               color="success"
-              onClick={syncPackedOrders}
+              onClick={handlesyncPackedOrders}
               variant="contained">
               {t('sync_packed_orders')}
             </Button>
@@ -84,9 +110,31 @@ export const OrdersPage = () => {
         </Grid>
         <Grid item xs={isListOpen ? 5 : 8}>
           <Paper sx={{ p: 2, height: '75vh', overflow: 'auto' }}>
-            <OrderItems />
+            <OrderItems showSnackbar={showSnackbar}/>
           </Paper>
         </Grid>
+        <Snackbar 
+          open={isSnackbarOpen} 
+          autoHideDuration={6000} 
+          onClose={handleSnackbarClose}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        >
+          <Alert 
+            onClose={handleSnackbarClose} 
+            severity={snackbarSeverity} 
+            sx={{ 
+              minWidth: 300, // Ensure a minimum width for larger appearance
+              fontSize: '1.2rem', // Bigger font size
+              padding: '16px 24px', // Increase padding for a larger alert box
+              display: 'flex', // Ensure flex for centering content
+              alignItems: 'center', // Center content vertically
+              justifyContent: 'center', // Center content horizontally
+              textAlign: 'center' // Ensure text aligns centrally
+            }} 
+          >
+            {snackbarMessage}
+          </Alert>
+        </Snackbar>
       </Grid>
 
       <ToggleButton>

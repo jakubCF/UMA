@@ -43,5 +43,9 @@
   "order_fulfilled_message": "All items in this order have been successfully packed.",
   "continue_picking": "Continue Packing",
   "mark_order_picked": "Mark Order as Picked",
-  "change_status": "Change Status"
+  "change_status": "Change Status",
+  "syncing_packed_orders": "Syncing packed orders...",
+  "fetching_orders": "Fetching orders...",
+  "order_marked_as_packed_success": "Order has been successfully marked as packed.",
+  "order_marked_as_packed_error": "Error marking order as packed. Please try again."
 }
