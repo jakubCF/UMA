@@ -28,7 +28,10 @@ const OrdersList = () => {
           <Select
             value={filterStatus}
             label="Status"
-            onChange={(e) => setFilterStatus(e.target.value)}
+            onChange={(e) => {
+              setFilterStatus(e.target.value); // Update filter status in store
+              setSelectedOrderId(null); // --- FIX: Deselect current order ---
+            }}
           >
             <MenuItem value="processing">{t('processing')}</MenuItem>
             <MenuItem value="packed">{t('packed')}</MenuItem>
@@ -43,7 +46,16 @@ const OrdersList = () => {
           <ListItem key={order.id} disablePadding>
             <ListItemButton 
               selected={selectedOrderId === order.id}
-              onClick={() => setSelectedOrderId(order.id)}
+              onClick={() => {
+              // --- FIX: Conditional logic for toggling selection ---
+              if (selectedOrderId === order.id) {
+                // If the clicked order is already selected, deselect it
+                setSelectedOrderId(null);
+              } else {
+                // Otherwise, select the clicked order
+                setSelectedOrderId(order.id);
+              }
+            }}
             >
               <ListItemText 
                 primary={t('order') + ` ${order.order_number}`}
