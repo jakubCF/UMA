@@ -78,6 +78,24 @@ class ProductVariantViewSet(ModelViewSet):
 class StockAdjustmentViewSet(ModelViewSet):
     queryset = ProductStockAdjustment.objects.all()
     serializer_class = ProductStockAdjustmentSerializer
+
+    def get_queryset(self):
+        queryset = ProductStockAdjustment.objects.all()
+        status = self.request.query_params.get('status', None)
+        if status is not None:
+            queryset = queryset.filter(status=status)
+        return queryset
+    
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.status != 'pending':
+            return Response(
+                {"error": "Only pending adjustments can be deleted."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
     def create(self, request, *args, **kwargs):
         # Check if request contains multiple adjustments
         adjustments_data = request.data if isinstance(request.data, list) else [request.data]
