@@ -1,9 +1,101 @@
-import { Typography } from '@mui/material';
+import { Typography, Grid, Box, Snackbar, Alert } from '@mui/material';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { ProductSearch } from '../components/products/ProductSearch';
+import { StockAdjustmentList } from '../components/products/StockAdjustmentList';
+import { useProductsStore } from '../store/productsStore';
 
 export const ProductsPage = () => {
+  const barcodeBuffer = useRef('');
+  const barcodeTimeout = useRef<NodeJS.Timeout>();
+  const { addStockAdjustmentEAN, fetchAllData } = useProductsStore();
+
+  // --- SIMPLIFIED GLOBAL SNACKBAR STATE AND LOGIC ---
+    const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+    const [snackbarSeverity, setSnackbarSeverity] = useState<'success' | 'info' | 'error' | 'warning'>('info');
+  
+    // Function to show a single snackbar message
+    const showSnackbar = useCallback((message: string, severity: 'success' | 'info' | 'error' | 'warning') => {
+      setSnackbarMessage(message);
+      setSnackbarSeverity(severity);
+      setIsSnackbarOpen(true);
+      // Material UI's Snackbar autoHideDuration will automatically call onClose after 6 seconds
+    }, []);
+  
+    // Handle closing of the single Snackbar
+    const handleSnackbarClose = useCallback((event?: React.SyntheticEvent | Event, reason?: string) => {
+      if (reason === 'clickaway') {
+        return;
+      }
+      setIsSnackbarOpen(false);
+    }, []);
+    // --- END SIMPLIFIED GLOBAL SNACKBAR LOGIC ---
+
+  useEffect(() => {
+    fetchAllData();
+  }, [fetchAllData]);
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === 'Enter' && barcodeBuffer.current) {
+        addStockAdjustmentEAN(barcodeBuffer.current, 1);
+        barcodeBuffer.current = '';
+        return;
+      }
+
+      // Reset timeout
+      if (barcodeTimeout.current) {
+        clearTimeout(barcodeTimeout.current);
+      }
+
+      // Accumulate barcode
+      barcodeBuffer.current += event.key;
+
+      // Clear buffer after delay
+      barcodeTimeout.current = setTimeout(() => {
+        barcodeBuffer.current = '';
+      }, 100);
+    };
+
+    window.addEventListener('keypress', handleKeyPress);
+    return () => window.removeEventListener('keypress', handleKeyPress);
+  }, [addStockAdjustmentEAN]);
+
   return (
-    <Typography variant="h4">
-      Products Management
-    </Typography>
+    <Box>
+      <Typography variant="h4" gutterBottom>
+        Products Management
+      </Typography>
+      <Grid container spacing={8}>
+        <Grid item xs={6}>
+          <ProductSearch showSnackbar={showSnackbar}/>
+        </Grid>
+        <Grid item xs={6}>
+          <StockAdjustmentList showSnackbar={showSnackbar}/>
+        </Grid>
+      </Grid>
+      <Snackbar 
+        open={isSnackbarOpen} 
+        autoHideDuration={6000} 
+        onClose={handleSnackbarClose}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <Alert 
+          onClose={handleSnackbarClose} 
+          severity={snackbarSeverity} 
+          sx={{ 
+            minWidth: 300, // Ensure a minimum width for larger appearance
+            fontSize: '1.2rem', // Bigger font size
+            padding: '16px 24px', // Increase padding for a larger alert box
+            display: 'flex', // Ensure flex for centering content
+            alignItems: 'center', // Center content vertically
+            justifyContent: 'center', // Center content horizontally
+            textAlign: 'center' // Ensure text aligns centrally
+          }} 
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+    </Box>
   );
 };

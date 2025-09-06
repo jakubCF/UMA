@@ -47,5 +47,18 @@
   "syncing_packed_orders": "Syncing packed orders...",
   "fetching_orders": "Fetching orders...",
   "order_marked_as_packed_success": "Order has been successfully marked as packed.",
-  "order_marked_as_packed_error": "Error marking order as packed. Please try again."
+  "order_marked_as_packed_error": "Error marking order as packed. Please try again.",
+  "search_product_code": "Search Product Code",
+  "stock": "Stock",
+  "quantity": "Quantity",
+  "pending_adjustments": "Pending Adjustments",
+  "adjustment_quantity": "Adjustment Quantity",
+  "add": "Add",
+  "update": "Update",
+  "product_variant_not_found": "Product variant not found",
+  "failed_to_fetch_products": "Failed to fetch products",
+  "failed_to_fetch_variants": "Failed to fetch variants",
+  "failed_to_fetch_adjustments": "Failed to fetch adjustments",
+  "failed_to_add_adjustment": "Failed to add adjustment",
+  "failed_to_delete_adjustment": "Failed to delete adjustment"
 }

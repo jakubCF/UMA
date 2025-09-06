@@ -56,4 +56,16 @@ export const ordersApi = {
   syncPackedOrders: (orderids:number[]) => api.post('/sync/', {"type": "orders_status", "orderids":orderids, "statusid": 21, }),
 };
 
+export const productsApi = {
+  getProducts: () => api.get('/products/'),
+  getVariants: () => api.get('/variants/'),
+  getPendingAdjustments: () => api.get('/stock-adjustments/?status=pending'),
+  addStockAdjustmentVariant: (data: { variant_code: string; adjustment_quantity: number }) => 
+    api.post('/stock-adjustments/', data),
+  addStockAdjustmentProduct: (data: { product_code: string; adjustment_quantity: number }) => 
+    api.post('/stock-adjustments/', data),
+  deleteStockAdjustment: (id: number) => 
+    api.delete(`/stock-adjustments/${id}/`),
+};
+
 export default api;

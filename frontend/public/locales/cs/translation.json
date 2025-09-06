@@ -47,6 +47,18 @@
   "syncing_packed_orders": "Synchronizuji zabalené objednávky...",
   "fetching_orders": "Načítám objednávky...",
   "order_marked_as_packed_success": "Objednávka byla úspěšně označena jako přichystaná.",
-  "order_marked_as_packed_error": "Chyba při označování objednávky jako přichystá. Zkuste to prosím znovu."
-
+  "order_marked_as_packed_error": "Chyba při označování objednávky jako přichystá. Zkuste to prosím znovu.",
+  "search_product_code": "Vyhledat kód produktu",
+  "stock": "Skladem",
+  "quantity": "Množství",
+  "pending_adjustments": "Čekající úpravy",
+  "adjustment_quantity": "Množství úpravy",
+  "add": "Přidat",
+  "update": "Aktualizovat",
+  "product_variant_not_found": "Varianta produktu nenalezena",
+  "failed_to_fetch_products": "Nepodařilo se načíst produkty",
+  "failed_to_fetch_variants": "Nepodařilo se načíst varianty",
+  "failed_to_fetch_adjustments": "Nepodařilo se načíst úpravy",
+  "failed_to_add_adjustment": "Nepodařilo se přidat úpravu",
+  "failed_to_delete_adjustment": "Nepodařilo se smazat úpravu"
 }
