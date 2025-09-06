@@ -22,7 +22,7 @@ class ProductViewSet(ModelViewSet):
         product = self.get_object()
         serializer = ProductStockAdjustmentSerializer(data={
             **request.data,
-            'product': product.id
+            'product_id': product.id
         })
         
         if serializer.is_valid():
@@ -54,7 +54,7 @@ class ProductVariantViewSet(ModelViewSet):
         variant = self.get_object()
         serializer = ProductStockAdjustmentSerializer(data={
             **request.data,
-            'variant': variant.id
+            'variant_id': variant.id
         })
         if serializer.is_valid():
             # check if stock adjustment for this product already exists and is pending
@@ -110,7 +110,7 @@ class StockAdjustmentViewSet(ModelViewSet):
             if 'product_code' in adjustment:
                 try:
                     product = Product.objects.get(code=adjustment['product_code'])
-                    processed_item['product'] = product.id
+                    processed_item['product_id'] = product.id
                     del processed_item['product_code']
                 except Product.DoesNotExist:
                     return Response(
@@ -121,7 +121,7 @@ class StockAdjustmentViewSet(ModelViewSet):
             if 'variant_code' in adjustment:
                 try:
                     variant = ProductVariant.objects.get(code=adjustment['variant_code'])
-                    processed_item['variant'] = variant.id
+                    processed_item['variant_id'] = variant.id
                     del processed_item['variant_code']
                 except ProductVariant.DoesNotExist:
                     return Response(

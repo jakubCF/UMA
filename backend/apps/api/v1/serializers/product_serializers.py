@@ -14,6 +14,21 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProductStockAdjustmentSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)
+    variant = ProductVariantSerializer(read_only=True)
+    product_id = serializers.PrimaryKeyRelatedField(
+        queryset=Product.objects.all(),
+        source='product',
+        required=False,
+        write_only=True
+    )
+    variant_id = serializers.PrimaryKeyRelatedField(
+        queryset=ProductVariant.objects.all(),
+        source='variant',
+        required=False,
+        write_only=True
+    )
+
     class Meta:
         model = ProductStockAdjustment
         fields = '__all__'
