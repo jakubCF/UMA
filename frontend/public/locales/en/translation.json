@@ -60,5 +60,7 @@
   "failed_to_fetch_variants": "Failed to fetch variants",
   "failed_to_fetch_adjustments": "Failed to fetch adjustments",
   "failed_to_add_adjustment": "Failed to add adjustment",
-  "failed_to_delete_adjustment": "Failed to delete adjustment"
+  "failed_to_delete_adjustment": "Failed to delete adjustment",
+  "update_stock_levels": "Update stock levels in Upgates",
+  "quantity_cannot_be_zero": "Quantity cannot be zero"
 }

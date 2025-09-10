@@ -1,13 +1,15 @@
-import { Typography, Grid, Box, Snackbar, Alert } from '@mui/material';
+import { Grid, Box, Snackbar, Alert, Paper, Button } from '@mui/material';
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { ProductSearch } from '../components/products/ProductSearch';
 import { StockAdjustmentList } from '../components/products/StockAdjustmentList';
 import { useProductsStore } from '../store/productsStore';
+import { useTranslation } from 'react-i18next';
 
 export const ProductsPage = () => {
+  const { t } = useTranslation();
   const barcodeBuffer = useRef('');
   const barcodeTimeout = useRef<NodeJS.Timeout>();
-  const { addStockAdjustmentEAN, fetchAllData } = useProductsStore();
+  const { addStockAdjustmentEAN, fetchAllData, syncStockAdjustments } = useProductsStore();
 
   // --- SIMPLIFIED GLOBAL SNACKBAR STATE AND LOGIC ---
     const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
@@ -63,15 +65,26 @@ export const ProductsPage = () => {
 
   return (
     <Box>
-      <Typography variant="h4" gutterBottom>
-        Products Management
-      </Typography>
-      <Grid container spacing={8}>
+       <Grid container spacing={2} sx={{ mb: 2 }}>
+        <Grid item xs={12}>
+          <Paper sx={{ p: 2 }}>
+            <Button
+              color="success"
+              onClick={syncStockAdjustments}
+              variant="contained">
+              {t('update_stock_levels')}
+            </Button>
+          </Paper>
+        </Grid>
+      </Grid>
+      <Grid container spacing={2}>
         <Grid item xs={6}>
-          <ProductSearch showSnackbar={showSnackbar}/>
+            <ProductSearch showSnackbar={showSnackbar}/>
         </Grid>
         <Grid item xs={6}>
-          <StockAdjustmentList showSnackbar={showSnackbar}/>
+          <Paper sx={{ p: 2, height: '77vh', overflow: 'auto' }}>
+            <StockAdjustmentList showSnackbar={showSnackbar}/>
+          </Paper>
         </Grid>
       </Grid>
       <Snackbar 

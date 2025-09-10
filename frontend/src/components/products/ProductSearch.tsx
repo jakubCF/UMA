@@ -1,4 +1,4 @@
-import { TextField, List, ListItem, Box, Typography, IconButton, InputAdornment, CardMedia, Button, Grid } from '@mui/material';
+import { TextField, Box, Typography, IconButton, InputAdornment, CardMedia, Button, Grid, Card, CardContent, Paper } from '@mui/material';
 import { useState, KeyboardEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import SearchIcon from '@mui/icons-material/Search';
@@ -33,7 +33,7 @@ export const ProductSearch: React.FC<ProductPageProps> = ({ showSnackbar }) => {
       return;
     }
     const matchedProducts = products.filter(p => 
-      p.code.toLowerCase().includes(searchTerm.toLowerCase())
+      p.code.toLowerCase().endsWith(searchTerm.toLowerCase())
     );
     setSearchResults(matchedProducts);
   };
@@ -44,19 +44,23 @@ export const ProductSearch: React.FC<ProductPageProps> = ({ showSnackbar }) => {
     }
   };
 
-  const handleQuantityChange = (variantId: number, value: number) => {
+  const handleQuantityChange = (code: string, value: number) => {
     setQuantities(prev => ({
       ...prev,
-      [variantId]: Math.max(1, value)
+      [code]: isNaN(value) ? 1 : value
     }));
   };
 
-  const handleAdjustment = (variant: ProductVariant) => {
-    const quantity = quantities[variant.id] || 1;
-    addStockAdjustmentCode(variant.code, quantity);
+  const handleAdjustment = (code: string) => {
+    const quantity = quantities[code] ?? 1;  // Use nullish coalescing for default value
+    if (quantity === 0) {
+      showSnackbar(t('quantity_cannot_be_zero'), 'error');
+      return;
+    }
+    addStockAdjustmentCode(code, quantity);
     // Reset quantity after adjustment
-    setQuantities(prev => ({ ...prev, [variant.id]: 1 }));
-    showSnackbar( t('adjustment_added') + ' code: ' + variant.code , 'success');
+    setQuantities(prev => ({ ...prev, [code]: 1 }));
+    showSnackbar(t('adjustment_added') + ' code: ' + code, 'success');
   };
 
   return (
@@ -78,84 +82,164 @@ export const ProductSearch: React.FC<ProductPageProps> = ({ showSnackbar }) => {
           ),
         }}
       />
-      <List>
+      <Grid container spacing={2}>
+        <Paper sx={{ mt: 2, ml: 2, p: 2, height: '69vh', width: '100%', overflow: 'auto' }}>
         {searchResults.map((product) => (
-          <Box key={product.id} sx={{ mb: 2 }}>
-            <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+          <Grid item xs={12} key={product.id}>
+            <Typography variant="subtitle1" sx={{ fontWeight: 'bold', mb: 1 }}>
               {product.code} - {product.title}
             </Typography>
-            <List sx={{ pl: 2 }}>
-              {product.variants.map((variant:ProductVariant) => (
-                <ListItem key={variant.id}>
-                  <Grid container spacing={2} alignItems="center">
-                    <Grid item xs={4}>
+            {product.variants && product.variants.length > 0 ? (
+              product.variants.map((variant: ProductVariant) => (
+                <Card key={variant.id} sx={{ mb: 2 }}>
+                  <Grid container>
+                    <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                       <CardMedia
                         component="img"
                         sx={{ 
-                          width: '100%',
+                          height: '100%',
                           maxHeight: 180, 
                           objectFit: 'contain',
+                          margin: 'auto'
                         }}
                         image={variant.image_url || ''}
                         alt={product.title || ''}
                       />
                     </Grid>
-                    <Grid item xs={5}>
-                      <Box>
-                        <Typography variant="body1">
-                          {variant.code}
-                        </Typography>
-                        <Box sx={{ mt: 1 }}>
-                          <Typography variant="body2">
-                            {t('stock')}: {variant.stock}
-                          </Typography>
+                    <Grid item xs={9} sx={{ display: 'flex' }}>
+                      <CardContent sx={{ flexGrow: 1, p: 2 }}>
+                        <Grid container sx={{ height: '100%' }}>
+                          <Grid item xs={7}>
+                            <Typography variant="subtitle1">{variant.code}</Typography>
+                            <Box sx={{ mt: 1 }}>
+                              <Typography variant="body2">
+                                {t('stock')}: {variant.stock}
+                              </Typography>
+                              {variant.parameters && Object.entries(variant.parameters).map(([key, value]) => (
+                                <Typography key={key} variant="body2">
+                                  {formatParameterString(key, value)}
+                                </Typography>
+                              ))}
+                              <Typography variant="body2" sx={{mt:2}}>
+                                EAN: {variant.ean}
+                              </Typography>
+                            </Box>
+                          </Grid>
+                          <Grid item xs={5}>
+                            <Box sx={{ 
+                              display: 'flex', 
+                              flexDirection: 'column', 
+                              alignItems: 'flex-end',
+                              height: '100%',
+                              gap: 2
+                            }}>
+                              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <IconButton size="small" onClick={() => handleQuantityChange(variant.code, (quantities[variant.code] ?? 1) - 1)}>
+                                  <RemoveIcon />
+                                </IconButton>
+                                <input
+                                  type="number"
+                                  style={{ width: 60, textAlign: 'center' }}
+                                  value={quantities[variant.code] ?? 1}
+                                  onChange={(e) => handleQuantityChange(variant.code, parseInt(e.target.value))}
+                                />
+                                <IconButton size="small" onClick={() => handleQuantityChange(variant.code, (quantities[variant.code] ?? 1) + 1)}>
+                                  <AddIcon />
+                                </IconButton>
+                              </Box>
+                              <Button
+                                variant="contained"
+                                size="small"
+                                sx={{ minWidth: 120 }}
+                                onClick={() => handleAdjustment(variant.code)}
+                              >
+                                {t('add')}
+                              </Button>
+                            </Box>
+                          </Grid>
+                        </Grid>
+                      </CardContent>
+                    </Grid>
+                  </Grid>
+                </Card>
+              ))
+            ) : (
+              <Card sx={{ mb: 2 }}>
+                <Grid container>
+                  <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <CardMedia
+                      component="img"
+                      sx={{ 
+                        height: '100%',
+                        maxHeight: 180, 
+                        objectFit: 'contain',
+                        margin: 'auto'
+                      }}
+                      image={product.image_url || ''}
+                      alt={product.title || ''}
+                    />
+                  </Grid>
+                  <Grid item xs={9} sx={{ display: 'flex' }}>
+                    <CardContent sx={{ flexGrow: 1, p: 2 }}>
+                      <Grid container sx={{ height: '100%' }}>
+                        <Grid item xs={7}>
+                          <Typography variant="subtitle1">{product.code}</Typography>
                           <Box sx={{ mt: 1 }}>
-                            {variant.parameters && Object.entries(variant.parameters).map(([key, value]) => (
+                            <Typography variant="body2">
+                              {t('stock')}: {product.stock}
+                            </Typography>
+                            {product.parameters && Object.entries(product.parameters).map(([key, value]) => (
                               <Typography key={key} variant="body2">
                                 {formatParameterString(key, value)}
                               </Typography>
                             ))}
+                            <Typography variant="body2" sx={{mt:2}}>
+                              EAN: {product.ean}
+                            </Typography>
                           </Box>
-                          <Typography variant="body2">
-                            EAN: {variant.ean}
-                          </Typography>
-                        </Box>
-                      </Box>
-                    </Grid>
-                    <Grid item xs={3}>
-                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1, alignItems: 'center' }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                          <IconButton size="small" onClick={() => handleQuantityChange(variant.id, (quantities[variant.id] || 1) - 1)}>
-                            <RemoveIcon />
-                          </IconButton>
-                          <input
-                            type="number"
-                            min="1"
-                            style={{ width: 60, textAlign: 'center' }}
-                            value={quantities[variant.id] || 1}
-                            onChange={(e) => handleQuantityChange(variant.id, parseInt(e.target.value) || 1)}
-                          />
-                          <IconButton size="small" onClick={() => handleQuantityChange(variant.id, (quantities[variant.id] || 1) + 1)}>
-                            <AddIcon />
-                          </IconButton>
-                        </Box>
-                        <Button
-                          variant="contained"
-                          size="small"
-                          fullWidth
-                          onClick={() => handleAdjustment(variant)}
-                        >
-                          {t('add')}
-                        </Button>
-                      </Box>
-                    </Grid>
+                        </Grid>
+                        <Grid item xs={5}>
+                          <Box sx={{ 
+                            display: 'flex', 
+                            flexDirection: 'column', 
+                            alignItems: 'flex-end',
+                            height: '100%',
+                            gap: 2
+                          }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                              <IconButton size="small" onClick={() => handleQuantityChange(product.code, (quantities[product.code] ?? 1) - 1)}>
+                                <RemoveIcon />
+                              </IconButton>
+                              <input
+                                type="number"
+                                style={{ width: 60, textAlign: 'center' }}
+                                value={quantities[product.code] ?? 1}
+                                onChange={(e) => handleQuantityChange(product.code, parseInt(e.target.value))}
+                              />
+                              <IconButton size="small" onClick={() => handleQuantityChange(product.code, (quantities[product.code] ?? 1) + 1)}>
+                                <AddIcon />
+                              </IconButton>
+                            </Box>
+                            <Button
+                              variant="contained"
+                              size="small"
+                              sx={{ minWidth: 120 }}
+                              onClick={() => handleAdjustment(product.code)}
+                            >
+                              {t('add')}
+                            </Button>
+                          </Box>
+                        </Grid>
+                      </Grid>
+                    </CardContent>
                   </Grid>
-                </ListItem>
-              ))}
-            </List>
-          </Box>
+                </Grid>
+              </Card>
+            )}
+          </Grid>
         ))}
-      </List>
+        </Paper>
+      </Grid>
     </Box>
   );
 };

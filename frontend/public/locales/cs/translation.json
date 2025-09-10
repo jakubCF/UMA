@@ -60,5 +60,7 @@
   "failed_to_fetch_variants": "Nepodařilo se načíst varianty",
   "failed_to_fetch_adjustments": "Nepodařilo se načíst úpravy",
   "failed_to_add_adjustment": "Nepodařilo se přidat úpravu",
-  "failed_to_delete_adjustment": "Nepodařilo se smazat úpravu"
+  "failed_to_delete_adjustment": "Nepodařilo se smazat úpravu",
+  "update_stock_levels": "Aktualizovat sklad v Upgates",
+  "quantity_cannot_be_zero": "Množství nemůže být nula"
 }

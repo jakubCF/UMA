@@ -66,6 +66,8 @@ export const productsApi = {
     api.post('/stock-adjustments/', data),
   deleteStockAdjustment: (id: number) => 
     api.delete(`/stock-adjustments/${id}/`),
+  syncStockAdjustments: () => 
+    api.post('/sync/', {"type": "update_stock"}),
 };
 
 export default api;

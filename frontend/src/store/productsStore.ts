@@ -24,6 +24,7 @@ interface ProductsStore {
   addStockAdjustmentCode: (code: string, quantity: number) => Promise<void>;
   changeAdjustment: (id: number, quantity: number) => Promise<void>;
   handleDeleteAdj: (id: number) => Promise<void>;
+  syncStockAdjustments: () => Promise<void>;
 }
 
 export const useProductsStore = create<ProductsStore>((set, get) => ({
@@ -180,12 +181,21 @@ export const useProductsStore = create<ProductsStore>((set, get) => ({
         set({ error: 'Product or variant not found in adjustment' });
     }
   },
-handleDeleteAdj: async (id) => {
-    try {
-    await productsApi.deleteStockAdjustment(id);
-    await get().fetchPendingAdjustments();
-    } catch (error) {
-    set({ error: 'Failed to delete adjustment' });
-    }
-}
+    handleDeleteAdj: async (id) => {
+        try {
+        await productsApi.deleteStockAdjustment(id);
+        await get().fetchPendingAdjustments();
+        } catch (error) {
+        set({ error: 'Failed to delete adjustment' });
+        }
+    },
+    syncStockAdjustments: async () => {
+        try {
+        await productsApi.syncStockAdjustments();
+        // Optionally, you might want to refetch adjustments after syncing
+        await get().fetchPendingAdjustments();
+        } catch (error) {
+        set({ error: 'Failed to sync stock adjustments' });
+        }
+    },
 }));

@@ -1,4 +1,4 @@
-import { List, ListItem, Typography, Box, CircularProgress, CardMedia, Grid, IconButton, Button} from '@mui/material';
+import { Typography, Box, CircularProgress, CardMedia, Grid, IconButton, Button, Card, CardContent} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever'
@@ -29,10 +29,15 @@ export const StockAdjustmentList: React.FC<ProductPageProps> = ({ showSnackbar }
   };
 
   const handleAdjustment = (adjustment: StockAdjustment) => {
-    const quantity = quantities[adjustment.id];
+    const quantity = quantities[adjustment.id] || 0;
+    // Prevent adjustment if quantity is 0
+    if (quantity === 0) {
+      showSnackbar(t('quantity_cannot_be_zero'), 'error');
+      return;
+    }
     changeAdjustment(adjustment.id, quantity);
     // Reset quantity after adjustment
-    setQuantities(prev => ({ ...prev, [adjustment.id]: 1 }));
+    setQuantities(prev => ({ ...prev, [adjustment.id]: 0 }));
     showSnackbar( t('adjustment_changed') + ' code: ' + adjustment.variant_code , 'success');
   };
 
@@ -49,76 +54,86 @@ export const StockAdjustmentList: React.FC<ProductPageProps> = ({ showSnackbar }
       <Typography variant="h6" gutterBottom>
         {t('pending_adjustments')}
       </Typography>
-      <List>
+      <Grid container spacing={2}>
         {pendingAdjustments.map((adjustment) => (
-          <ListItem key={adjustment.id}>
-            <Box>
-              <Typography variant="body1">
-                {adjustment.product_code || adjustment.variant_code}
-              </Typography>
-              <Box>
-                <Grid container spacing={2}>
-                    <Grid item xs={2} sm={2}>
-                        <Box sx={{ display: 'flex', gap: 2 }}>
-                        <CardMedia
-                            component="img"
-                            sx={{ 
-                            height: '100%',
-                            maxHeight: 100, 
-                            objectFit: 'contain',
-                            margin: 'auto'
-                            }}
-                            image={adjustment.variant?.image_url || adjustment.product?.image_url || ''}
-                            alt={adjustment.title || ''}
-                        />
-                        </Box>
-                    </Grid>
-                    <Grid item xs={7} sm={7}>
-                        <Typography variant="body2">
-                        {adjustment.product_code || adjustment.variant_code} - {adjustment.title}
+          <Grid item xs={12} key={adjustment.id}>
+            <Card>
+              <Grid container>
+                <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <CardMedia
+                    component="img"
+                    sx={{ 
+                      height: '100%',
+                      maxHeight: 120, 
+                      objectFit: 'contain',
+                      margin: 'auto'
+                    }}
+                    image={adjustment.variant?.image_url || adjustment.product?.image_url || ''}
+                    alt={adjustment.title || ''}
+                  />
+                </Grid>
+                <Grid item xs={9} sx={{ display: 'flex' }}>
+                  <CardContent sx={{ flexGrow: 1, p: 2 }}>
+                    <Grid container sx={{ height: '100%' }}>
+                      <Grid item xs={7}>
+                        <Typography variant="subtitle1">
+                          {adjustment.variant_code || adjustment.product_code}
                         </Typography>
-                        <Typography variant="body2">
-                        {t('adjustment_quantity')}: {adjustment.adjustment_quantity > 0 ? '+' : ''}{adjustment.adjustment_quantity}
+                        <Typography variant="body2">{adjustment.title}</Typography>
+                        <Typography variant="body2" sx={{ mt: 2 }}>
+                          {t('adjustment_quantity')}: {adjustment.adjustment_quantity > 0 ? '+' : ''}{adjustment.adjustment_quantity}
                         </Typography>
-                    </Grid>
-                    <Grid item xs={3} sm={3}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      </Grid>
+                      <Grid item xs={5}>
+                        <Box sx={{ 
+                          display: 'flex', 
+                          flexDirection: 'column', 
+                          alignItems: 'flex-end',
+                          height: '100%',
+                          gap: 2
+                        }}>
+                          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             <IconButton size="small" onClick={() => handleQuantityChange(adjustment.id, (quantities[adjustment.id] || 0) - 1)}>
-                            <RemoveIcon />
+                              <RemoveIcon />
                             </IconButton>
                             <input
-                            type="number"
-                            style={{ width: 60, textAlign: 'center' }}
-                            value={quantities[adjustment.id] || 0}
-                            onChange={(e) => handleQuantityChange(adjustment.id, parseInt(e.target.value))}
+                              type="number"
+                              style={{ width: 60, textAlign: 'center' }}
+                              value={quantities[adjustment.id] || 0}
+                              onChange={(e) => handleQuantityChange(adjustment.id, parseInt(e.target.value))}
                             />
                             <IconButton size="small" onClick={() => handleQuantityChange(adjustment.id, (quantities[adjustment.id] || 0) + 1)}>
-                            <AddIcon />
+                              <AddIcon />
                             </IconButton>
-                        </Box>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                          </Box>
+                          <Box sx={{ display: 'flex', gap: 1 }}>
                             <Button
-                                variant="contained"
-                                size="small"
-                                
-                                onClick={() => handleAdjustment(adjustment)}
+                              variant="contained"
+                              size="small"
+                              sx={{ minWidth: 90 }}
+                              onClick={() => handleAdjustment(adjustment)}
                             >
-                                {t('update')}
+                              {t('update')}
                             </Button>
                             <Button
-                                variant="contained"
-                                color='error'
-                                size="small" onClick={() => handleDelete(adjustment.id)}>
-                                <DeleteForeverIcon />
+                              variant="contained"
+                              color='error'
+                              size="small"
+                              onClick={() => handleDelete(adjustment.id)}
+                            >
+                              <DeleteForeverIcon />
                             </Button>
+                          </Box>
                         </Box>
+                      </Grid>
                     </Grid>
+                  </CardContent>
                 </Grid>
-              </Box>
-            </Box>
-          </ListItem>
+              </Grid>
+            </Card>
+          </Grid>
         ))}
-      </List>
+      </Grid>
     </Box>
   );
 };
