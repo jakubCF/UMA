@@ -630,7 +630,7 @@ def process_stock_adjustments():
     all_codes_to_sync = set()
     for adjustment in pending_adjustments:
         if adjustment.variant:
-            all_codes_to_sync.add(adjustment.variant.code)
+            all_codes_to_sync.add(adjustment.variant.product.code)
         elif adjustment.product:
             all_codes_to_sync.add(adjustment.product.code)
         else:
@@ -744,6 +744,12 @@ def process_stock_adjustments():
         products = [item for item in batch_update_payload if item['type'] == 'product']
         varinats = [item for item in batch_update_payload if item['type'] == 'variant']
 
+        for item in products:
+            item.pop('type', None)
+
+        for item in varinats:
+            item.pop('type', None)
+
         if not products:
             products = None
         if not varinats:
@@ -786,13 +792,20 @@ def process_stock_adjustments():
     
     processed_adjustments = []
     for adjustment in adjustments_to_process:
-        adjustment_code = adjustment.variant.code if adjustment.variant.code else adjustment.product.code
+        # Fix: Safely get the code by checking for None first
+        adjustment_code = None
+        if adjustment.variant:
+            adjustment_code = adjustment.variant.code
+        elif adjustment.product:
+            adjustment_code = adjustment.product.code
+
         if adjustment_code is None:
-            logger.error(f"Adjustment {adjustment} has no valid code after API sync. Marking as failed.")
+            logger.error(f"Adjustment {adjustment.pk} has no valid code after API sync. Marking as failed.")
             adjustment.status = 'failed'
             adjustment.error_message = "No valid product/variant code found."
             adjustment.save(update_fields=['status', 'error_message'])
             continue
+
         corresponding_item = response_item_lookup.get(adjustment_code) # Use .get() to avoid KeyError
 
         if corresponding_item is None:
