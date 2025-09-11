@@ -2,6 +2,7 @@ import { Grid, Paper, IconButton, Box, Snackbar, Alert } from '@mui/material';
 import { useState, useEffect, useCallback } from 'react';
 import { styled } from '@mui/material/styles';
 import ListIcon from '@mui/icons-material/List';
+import { RefreshRounded } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { useOrdersStore } from '../store/ordersStore';
@@ -26,7 +27,7 @@ const ToggleButton = styled(Box)(({ theme }) => ({
 
 export const OrdersPage = () => {
   const { t } = useTranslation();
-  const { selectedOrderId, fetchOrdersfromAPI, syncPackedOrders } = useOrdersStore();
+  const { selectedOrderId, fetchOrdersfromAPI, syncPackedOrders, fetchOrders } = useOrdersStore();
   const [isListOpen, setIsListOpen] = useState(true);
 
   // --- SIMPLIFIED GLOBAL SNACKBAR STATE AND LOGIC ---
@@ -50,6 +51,11 @@ export const OrdersPage = () => {
     setIsSnackbarOpen(false);
   }, []);
   // --- END SIMPLIFIED GLOBAL SNACKBAR LOGIC ---
+
+  const handleFetchOrders = useCallback(() => {
+    fetchOrders();
+    showSnackbar(t('refreshing_orders'), 'info');
+  }, [fetchOrders, showSnackbar, t]);
 
   const handlesyncPackedOrders = useCallback(() => {
     syncPackedOrders();
@@ -76,6 +82,12 @@ export const OrdersPage = () => {
       <Grid container spacing={2} sx={{ mb: 2 }}>
         <Grid item xs={12}>
           <Paper sx={{ p: 2 }}>
+            <Button sx={{ mr: 1 }} 
+              color="info"
+              onClick={handleFetchOrders}
+              variant="contained">
+              <RefreshRounded />
+            </Button>
             <Button sx={{ mr: 1 }} 
               color="warning"
               onClick={handlefetchOrdersfromAPI}

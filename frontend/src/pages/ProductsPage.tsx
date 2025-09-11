@@ -33,6 +33,11 @@ export const ProductsPage = () => {
     }, []);
     // --- END SIMPLIFIED GLOBAL SNACKBAR LOGIC ---
 
+    const handleSyncStockAdjustments = useCallback(() => {
+      syncStockAdjustments();
+      showSnackbar(t('syncing_stock_adjustments'), 'info');
+    }, [syncStockAdjustments, showSnackbar, t]);
+
   useEffect(() => {
     fetchAllData();
   }, [fetchAllData]);
@@ -70,7 +75,7 @@ export const ProductsPage = () => {
           <Paper sx={{ p: 2 }}>
             <Button
               color="success"
-              onClick={syncStockAdjustments}
+              onClick={handleSyncStockAdjustments}
               variant="contained">
               {t('update_stock_levels')}
             </Button>

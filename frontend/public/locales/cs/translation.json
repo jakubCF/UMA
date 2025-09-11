@@ -62,5 +62,7 @@
   "failed_to_add_adjustment": "Nepodařilo se přidat úpravu",
   "failed_to_delete_adjustment": "Nepodařilo se smazat úpravu",
   "update_stock_levels": "Aktualizovat sklad v Upgates",
-  "quantity_cannot_be_zero": "Množství nemůže být nula"
+  "quantity_cannot_be_zero": "Množství nemůže být nula",
+  "syncing_stock_adjustments": "Synchronizuji úpravy skladu...",
+  "refreshing_orders": "Načítám objednávky..."
 }

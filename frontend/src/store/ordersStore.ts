@@ -4,7 +4,7 @@ import { ordersApi } from '../services/api';
 
 // Define polling constants
 const POLLING_INTERVAL = 5000; // Poll every 5 seconds
-const MAX_POLLING_ATTEMPTS = 12; // Max 12 attempts (1 minute total polling time)
+const MAX_POLLING_ATTEMPTS = 6; // Max 12 attempts (1 minute total polling time)
 
 interface OrdersState {
   orders: Order[];
