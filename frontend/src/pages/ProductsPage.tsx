@@ -43,9 +43,14 @@ export const ProductsPage = () => {
   }, [fetchAllData]);
 
   useEffect(() => {
-    const handleKeyPress = (event: KeyboardEvent) => {
+    const handleKeyPress = async (event: KeyboardEvent) => {
       if (event.key === 'Enter' && barcodeBuffer.current) {
-        addStockAdjustmentEAN(barcodeBuffer.current, 1);
+        const response = await addStockAdjustmentEAN(barcodeBuffer.current, 1);
+        if (response.success) {
+          showSnackbar(t('adjustment_added') + ' EAN: ' + barcodeBuffer.current, 'success');
+        } else {
+          showSnackbar(response.message + ' EAN: ' + barcodeBuffer.current, 'error');
+        }
         barcodeBuffer.current = '';
         return;
       }
@@ -66,7 +71,7 @@ export const ProductsPage = () => {
 
     window.addEventListener('keypress', handleKeyPress);
     return () => window.removeEventListener('keypress', handleKeyPress);
-  }, [addStockAdjustmentEAN]);
+  }, [addStockAdjustmentEAN, showSnackbar, t]);
 
   return (
     <Box>

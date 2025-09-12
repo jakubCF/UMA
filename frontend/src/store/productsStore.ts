@@ -20,7 +20,7 @@ interface ProductsStore {
   fetchVariants: () => Promise<void>;
   fetchPendingAdjustments: () => Promise<void>;
   fetchAllData: () => Promise<void>;
-  addStockAdjustmentEAN: (ean: string, quantity: number) => Promise<void>;
+  addStockAdjustmentEAN: (ean: string, quantity: number) => Promise<{ success: boolean; message: string }>;
   addStockAdjustmentCode: (code: string, quantity: number) => Promise<void>;
   changeAdjustment: (id: number, quantity: number) => Promise<void>;
   handleDeleteAdj: (id: number) => Promise<void>;
@@ -101,19 +101,33 @@ export const useProductsStore = create<ProductsStore>((set, get) => ({
   },
   addStockAdjustmentEAN: async (ean, quantity?) => {
     const variant = get().variants.find(v => v.ean === ean);
-    if (!variant) {
-      set({ error: 'Product variant not found' });
-      return;
+    const product = get().products.find(p => p.ean === ean);
+    let inputdata: any;
+    if (variant) {
+        inputdata = {
+        variant_code: variant.code,
+        adjustment_quantity: quantity || 1
+      };
+    }
+    else if (product) {
+        //set({ error: 'Product variant not found' });
+        // If no variant but product with EAN exists, add adjustment for product
+        inputdata = {
+        product_code: product.code,
+        adjustment_quantity: quantity || 1
+        }
+    }
+    else {
+        return { success: false, message: 'EAN not found'};
     }
 
     try {
-      await productsApi.addStockAdjustmentVariant({
-        variant_code: variant.code,
-        adjustment_quantity: quantity || 1
-      });
+      await productsApi.addStockAdjustmentVariant(inputdata);
       await get().fetchPendingAdjustments();
+      return { success: true, message: 'Adjustment added' };
     } catch (error) {
-      set({ error: 'Failed to add adjustment' });
+      //set({ error: 'Failed to add adjustment' });
+      return { success: false, message: 'Failed to add adjustment' };
     }
   },
   addStockAdjustmentCode: async (code, quantity) => {
