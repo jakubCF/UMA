@@ -64,5 +64,8 @@
   "update_stock_levels": "Update stock levels in Upgates",
   "quantity_cannot_be_zero": "Quantity cannot be zero",
   "syncing_stock_adjustments": "Syncing stock adjustments...",
-  "refreshing_orders": "Refreshing orders..."
+  "refreshing_orders": "Refreshing orders...",
+  "adjustment_summary": "Adjustment Summary",
+  "close": "Close",
+  "details": "Details"
 }

@@ -206,8 +206,8 @@ export const useProductsStore = create<ProductsStore>((set, get) => ({
     syncStockAdjustments: async () => {
         try {
         await productsApi.syncStockAdjustments();
-        // Optionally, you might want to refetch adjustments after syncing
-        await get().fetchPendingAdjustments();
+        // Immediately clear the pending adjustments
+        set({ pendingAdjustments: [] });
         } catch (error) {
         set({ error: 'Failed to sync stock adjustments' });
         }

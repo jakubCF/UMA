@@ -64,5 +64,8 @@
   "update_stock_levels": "Aktualizovat sklad v Upgates",
   "quantity_cannot_be_zero": "Množství nemůže být nula",
   "syncing_stock_adjustments": "Synchronizuji úpravy skladu...",
-  "refreshing_orders": "Načítám objednávky..."
+  "refreshing_orders": "Načítám objednávky...",
+  "adjustment_summary": "Souhrn úprav",
+  "close": "Zavřít",
+  "details": "Detaily"
 }

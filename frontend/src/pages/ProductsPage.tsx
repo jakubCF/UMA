@@ -36,6 +36,7 @@ export const ProductsPage = () => {
     const handleSyncStockAdjustments = useCallback(() => {
       syncStockAdjustments();
       showSnackbar(t('syncing_stock_adjustments'), 'info');
+      (document.activeElement as HTMLElement)?.blur();
     }, [syncStockAdjustments, showSnackbar, t]);
 
   useEffect(() => {
@@ -81,7 +82,12 @@ export const ProductsPage = () => {
             <Button
               color="success"
               onClick={handleSyncStockAdjustments}
-              variant="contained">
+              variant="contained"
+              onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+              }
+              }}>
               {t('update_stock_levels')}
             </Button>
           </Paper>

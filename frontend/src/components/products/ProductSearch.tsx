@@ -90,7 +90,13 @@ export const ProductSearch: React.FC<ProductPageProps> = ({ showSnackbar }) => {
               {product.code} - {product.title}
             </Typography>
             {product.variants && product.variants.length > 0 ? (
-              product.variants.map((variant: ProductVariant) => (
+              [...product.variants]
+                .sort((a, b) => {
+                  const aNum = parseInt(a.code.split('-')[1]) || 0;
+                  const bNum = parseInt(b.code.split('-')[1]) || 0;
+                  return aNum - bNum;
+                })
+                .map((variant: ProductVariant) => (
                 <Card key={variant.id} sx={{ mb: 2 }}>
                   <Grid container>
                     <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
