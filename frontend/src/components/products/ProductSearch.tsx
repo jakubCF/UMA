@@ -140,7 +140,12 @@ export const ProductSearch: React.FC<ProductPageProps> = ({ showSnackbar }) => {
                               gap: 2
                             }}>
                               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <IconButton size="small" onClick={() => handleQuantityChange(variant.code, (quantities[variant.code] ?? 1) - 1)}>
+                                <IconButton size="small" onClick={() => handleQuantityChange(variant.code, (quantities[variant.code] ?? 1) - 1)}
+                                  onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault();
+                                }
+                                }}>
                                   <RemoveIcon />
                                 </IconButton>
                                 <input
@@ -149,7 +154,12 @@ export const ProductSearch: React.FC<ProductPageProps> = ({ showSnackbar }) => {
                                   value={quantities[variant.code] ?? 1}
                                   onChange={(e) => handleQuantityChange(variant.code, parseInt(e.target.value))}
                                 />
-                                <IconButton size="small" onClick={() => handleQuantityChange(variant.code, (quantities[variant.code] ?? 1) + 1)}>
+                                <IconButton size="small" onClick={() => handleQuantityChange(variant.code, (quantities[variant.code] ?? 1) + 1)}
+                                  onKeyDown={(e) => {
+                                    if (e.key === 'Enter') {
+                                      e.preventDefault();
+                                    }
+                                    }}>
                                   <AddIcon />
                                 </IconButton>
                               </Box>
@@ -158,6 +168,11 @@ export const ProductSearch: React.FC<ProductPageProps> = ({ showSnackbar }) => {
                                 size="small"
                                 sx={{ minWidth: 120 }}
                                 onClick={() => handleAdjustment(variant.code)}
+                                onKeyDown={(e) => {
+                                  if (e.key === 'Enter') {
+                                    e.preventDefault();
+                                  }
+                                  }}
                               >
                                 {t('add')}
                               </Button>
@@ -213,7 +228,12 @@ export const ProductSearch: React.FC<ProductPageProps> = ({ showSnackbar }) => {
                             gap: 2
                           }}>
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                              <IconButton size="small" onClick={() => handleQuantityChange(product.code, (quantities[product.code] ?? 1) - 1)}>
+                              <IconButton size="small" onClick={() => handleQuantityChange(product.code, (quantities[product.code] ?? 1) - 1)}
+                                onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault();
+                                }
+                                }}>
                                 <RemoveIcon />
                               </IconButton>
                               <input
@@ -222,7 +242,12 @@ export const ProductSearch: React.FC<ProductPageProps> = ({ showSnackbar }) => {
                                 value={quantities[product.code] ?? 1}
                                 onChange={(e) => handleQuantityChange(product.code, parseInt(e.target.value))}
                               />
-                              <IconButton size="small" onClick={() => handleQuantityChange(product.code, (quantities[product.code] ?? 1) + 1)}>
+                              <IconButton size="small" onClick={() => handleQuantityChange(product.code, (quantities[product.code] ?? 1) + 1)}
+                                onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault();
+                                }
+                                }}>
                                 <AddIcon />
                               </IconButton>
                             </Box>
@@ -231,6 +256,11 @@ export const ProductSearch: React.FC<ProductPageProps> = ({ showSnackbar }) => {
                               size="small"
                               sx={{ minWidth: 120 }}
                               onClick={() => handleAdjustment(product.code)}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault();
+                                }
+                                }}
                             >
                               {t('add')}
                             </Button>

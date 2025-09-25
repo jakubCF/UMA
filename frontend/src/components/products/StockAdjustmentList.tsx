@@ -82,6 +82,11 @@ export const StockAdjustmentList: React.FC<ProductPageProps> = ({ showSnackbar }
           variant="outlined"
           size="small"
           onClick={() => setOpenDialog(true)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+            }
+            }}
         >
           {t('details')}
         </Button>
@@ -100,7 +105,12 @@ export const StockAdjustmentList: React.FC<ProductPageProps> = ({ showSnackbar }
           pb: 1
         }}>
           <Typography variant="h6">{t('adjustment_summary')}</Typography>
-          <IconButton onClick={() => setOpenDialog(false)} size="small">
+          <IconButton onClick={() => setOpenDialog(false)} size="small"
+            onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+            }
+            }}>
             <CloseIcon />
           </IconButton>
         </DialogTitle>
@@ -142,6 +152,11 @@ export const StockAdjustmentList: React.FC<ProductPageProps> = ({ showSnackbar }
             onClick={() => setOpenDialog(false)}
             variant="contained"
             size="small"
+            onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+            }
+            }}
           >
             {t('close')}
           </Button>
@@ -192,7 +207,12 @@ export const StockAdjustmentList: React.FC<ProductPageProps> = ({ showSnackbar }
                           gap: 2
                         }}>
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <IconButton size="small" onClick={() => handleQuantityChange(adjustment.id, (quantities[adjustment.id] || 0) - 1)}>
+                            <IconButton size="small" onClick={() => handleQuantityChange(adjustment.id, (quantities[adjustment.id] || 0) - 1)}
+                              onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                e.preventDefault();
+                              }
+                              }}>
                               <RemoveIcon />
                             </IconButton>
                             <input
@@ -200,8 +220,18 @@ export const StockAdjustmentList: React.FC<ProductPageProps> = ({ showSnackbar }
                               style={{ width: 60, textAlign: 'center' }}
                               value={quantities[adjustment.id] || 0}
                               onChange={(e) => handleQuantityChange(adjustment.id, parseInt(e.target.value))}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault();
+                                }
+                                }}
                             />
-                            <IconButton size="small" onClick={() => handleQuantityChange(adjustment.id, (quantities[adjustment.id] || 0) + 1)}>
+                            <IconButton size="small" onClick={() => handleQuantityChange(adjustment.id, (quantities[adjustment.id] || 0) + 1)}
+                              onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                e.preventDefault();
+                              }
+                              }}>
                               <AddIcon />
                             </IconButton>
                           </Box>
@@ -211,6 +241,11 @@ export const StockAdjustmentList: React.FC<ProductPageProps> = ({ showSnackbar }
                               size="small"
                               sx={{ minWidth: 90 }}
                               onClick={() => handleAdjustment(adjustment)}
+                              onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                e.preventDefault();
+                              }
+                              }}
                             >
                               {t('update')}
                             </Button>
@@ -219,6 +254,11 @@ export const StockAdjustmentList: React.FC<ProductPageProps> = ({ showSnackbar }
                               color='error'
                               size="small"
                               onClick={() => handleDelete(adjustment.id)}
+                              onKeyDown={(e) => {
+                                if (e.key === 'Enter') {
+                                  e.preventDefault();
+                                }
+                                }}
                             >
                               <DeleteForeverIcon />
                             </Button>
