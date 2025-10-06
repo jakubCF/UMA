@@ -117,6 +117,12 @@ class ProductStockAdjustment(models.Model):
         auto_now_add=True,
         help_text="Timestamp when the adjustment record was created."
     )
+
+    updated_at = models.DateTimeField(
+        auto_now=True,
+        help_text="Timestamp when the adjustment record was last updated."
+    )
+
     processed_at = models.DateTimeField(
         null=True, blank=True,
         help_text="Timestamp when the adjustment was last processed by the integration."

@@ -32,4 +32,4 @@ class ProductStockAdjustmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductStockAdjustment
         fields = '__all__'
-        read_only_fields = ('status', 'processed_at', 'api_response_data', 'error_message')
+        read_only_fields = ('status', 'created_at', 'processed_at', 'api_response_data', 'error_message')

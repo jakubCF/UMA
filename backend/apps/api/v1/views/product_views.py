@@ -33,7 +33,7 @@ class ProductViewSet(ModelViewSet):
             ).first()
             if existing_adjustment:# add adjustment quantity to existing adjustment
                 existing_adjustment.adjustment_quantity += serializer.validated_data.get('adjustment_quantity', 0)
-                existing_adjustment.save(update_fields=['adjustment_quantity'])
+                existing_adjustment.save()  # Remove update_fields to allow auto_now to work
                 return Response(
                     {"detail": f'Stock adjustment updated. New quantity: {existing_adjustment.adjustment_quantity}'},
                     status=status.HTTP_200_OK
@@ -64,7 +64,7 @@ class ProductVariantViewSet(ModelViewSet):
             ).first()
             if existing_adjustment:# add adjustment quantity to existing adjustment
                 existing_adjustment.adjustment_quantity += serializer.validated_data.get('adjustment_quantity', 0)
-                existing_adjustment.save(update_fields=['adjustment_quantity'])
+                existing_adjustment.save()  # Remove update_fields to allow auto_now to work
                 return Response(
                     {"detail": f'Stock adjustment updated. New quantity: {existing_adjustment.adjustment_quantity}'},
                     status=status.HTTP_200_OK
@@ -151,7 +151,7 @@ class StockAdjustmentViewSet(ModelViewSet):
 
                     if existing_adjustment:
                         existing_adjustment.adjustment_quantity += serializer.validated_data.get('adjustment_quantity', 0)
-                        existing_adjustment.save(update_fields=['adjustment_quantity'])
+                        existing_adjustment.save()  # Remove update_fields to allow auto_now to work
                         results.append({
                             "code": product.code if product else variant.code,
                             "status": "updated",

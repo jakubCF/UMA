@@ -164,7 +164,14 @@ export const StockAdjustmentList: React.FC<ProductPageProps> = ({ showSnackbar }
       </Dialog>
 
       <Grid container spacing={2}>
-        {pendingAdjustments.map((adjustment) => (
+        {pendingAdjustments.sort((a, b) => {
+            // Ensure we have valid dates
+            const dateA = a.updated_at ? new Date(a.updated_at).getTime() : 0;
+            const dateB = b.updated_at ? new Date(b.updated_at).getTime() : 0;
+            // Sort in descending order (newest first)
+            return dateB - dateA;
+          })
+          .map((adjustment) => (
           <Grid item xs={12} key={adjustment.id}>
             <Card>
               <Grid container>

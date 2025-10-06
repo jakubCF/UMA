@@ -51,6 +51,7 @@ export interface ProductStockAdjustment {
     adjustment_quantity: number;
     status: StockAdjustmentStatus;
     created_at: string;
+    updated_at: string;
     processed_at: string | null;
     processed_by: {
         id: number;

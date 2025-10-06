@@ -146,6 +146,7 @@ FIELD_ENCRYPTION_KEY = '10QGQcbD0cHP-qnJu-CrfZzfyN0EtBMIKyHWmTmo1ts='
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React dev server
+    "http://localhost:3001",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
