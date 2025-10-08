@@ -14,7 +14,7 @@ class Product(models.Model):
     code_supplier = models.CharField(max_length=255, blank=True, null=True)
     availability_id = models.IntegerField(null=True, blank=True)
     availability = models.CharField(max_length=100, blank=True, null=True)
-    stock = models.PositiveIntegerField(default=0)
+    stock = models.IntegerField(default=0)
     stock_position = models.CharField(max_length=100, blank=True, null=True)
     weight = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     unit = models.CharField(max_length=50, blank=True, null=True)
@@ -43,7 +43,7 @@ class ProductVariant(models.Model):
     ean = models.CharField(max_length=100, blank=True, null=True)
     availability_id = models.IntegerField(null=True, blank=True)
     availability = models.CharField(max_length=100, blank=True, null=True)
-    stock = models.PositiveIntegerField(default=0)
+    stock = models.IntegerField(default=0)
     stock_position = models.CharField(max_length=100, blank=True, null=True)
     weight = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     image_url = models.URLField(max_length=2000, blank=True, null=True) # Variant specific image URL
